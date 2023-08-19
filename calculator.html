@@ -1,0 +1,49 @@
+<!--
+ * @Author: Richard yuetingpei888@gmail.com
+ * @Date: 2023-08-11 14:59:52
+ * @LastEditors: Richard yuetingpei888@gmail.com
+ * @LastEditTime: 2023-08-11 15:48:19
+ * @FilePath: /webPages/calculator.html
+ * @Description: 
+ * 
+ * Copyright (c) 2023 by ${git_email}, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<script>
+    // ...你的代码...
+    // function Calculator() {
+    //     this.a = 0;
+    //     this.b = 0;
+    //     this.read = function () {
+    //         this.a = +prompt('a?', 0);
+    //         this.b = +prompt('b?', 0);
+    //     };
+    //     this.sum = function () { return this.a + this.b; },
+    //         this.mul = function () { return this.a * this.b; }
+    // }
+    // let calculator = new Calculator();
+    // calculator.read();
+
+    // alert("Sum=" + calculator.sum());
+    // alert("Mul=" + calculator.mul());
+
+    function Accumulator(startingValue) {
+        this.value = 0;
+        this.value += startingValue;
+        this.read = function () {
+            this.value += +prompt('value?', 0);
+            return this;
+        }
+    }
+
+    let accumulator = new Accumulator(1);
+    accumulator.read();
+    accumulator.read();
+    alert(accumulator.value);
+
+
+
+</script>
+
+</html>
+</script>

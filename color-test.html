@@ -1,0 +1,63 @@
+<!--
+ * @Author: RichardThunder yuetingpei@outlook.com
+ * @Date: 2023-06-14 09:28:12
+ * @LastEditors: Richard 46419003+RichardThunder@users.noreply.github.com
+ * @LastEditTime: 2023-06-14 12:55:04
+ * @FilePath: /webPages/color-test.html
+ * @Description: 
+ * 
+ * Copyright (c) 2023 by Richard 46419003+RichardThunder@users.noreply.github.com, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>循环生成圆形</title>
+    <style>
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border-color: black;
+            border-width: 1em;
+            background-color: white;
+            display: inline-block;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="circles-container"></div>
+
+    <script>
+        var colors = ["red", "yellow", "green"];
+
+        function createButtonHandler(circle) {
+            return function () {
+                changeColor(circle);
+            };
+        }
+
+        function changeColor(circle) {
+            var currentColor = circle.style.backgroundColor;
+            var currentIndex = colors.indexOf(currentColor);
+            var nextIndex = (currentIndex + 1) % colors.length;
+            circle.style.backgroundColor = colors[nextIndex];
+        }
+
+        var circlesContainer = document.getElementById("circles-container");
+        for (var i = 0; i < 60; i++) {
+            var circle = document.createElement("div");
+            circle.className = "circle";
+            circlesContainer.appendChild(circle);
+
+            var button = document.createElement("button");
+            button.textContent = "点击变色";
+            button.addEventListener("click", createButtonHandler(circle));
+            circlesContainer.appendChild(button);
+        }
+    </script>
+</body>
+
+</html>
