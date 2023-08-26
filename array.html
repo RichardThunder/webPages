@@ -1,3 +1,12 @@
+<!--
+ * @Author: yuetingpei yuetingpei888@gmail.com
+ * @Date: 2023-08-26 14:13:03
+ * @LastEditors: yuetingpei yuetingpei888@gmail.com
+ * @LastEditTime: 2023-08-26 16:42:27
+ * @FilePath: \WebPages\array.html
+ * @Description: 
+ * Copyright (c) 2023 by yuetingpei888@gmail.com, All Rights Reserved. 
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +14,40 @@
     <title>Title</title>
 </head>
 <body>
-<script type="text/javascript" src="array.js"></script>
+<script>
+    /*
+    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    document.write(arr + '<br>')
+    let newArr = arr.splice(2, 3, 'add', 'element')
+    document.write(newArr + '<br>')
+    newArr = arr.splice(2, 0, 'only', 'add', 'element')
+    document.write(arr + '<br>')
+    document.write(newArr + '<br>')
+    arr.splice(-1, 0, 'back')
+    arr.push('end')
+    document.write(arr + '<br>')
+    newArr = arr.concat(['a', 'b', 'c'])
+    document.write(arr + '<br>')
+    document.write(newArr + '<br>')
+    arr.forEach(function (item, index, array) {
+        document.write(item + ' ' + index + ' ' + 'in array:' + `${array}` + '<br>')
+    })
+*/
+
+    let users = [
+        { id: 1, name: 'John' },
+        { id: 2, name: 'Pete' },
+        { id: 3, name: 'Mary' },
+        { id: 4, name: 'John' },
+    ]
+    let user = users.find(item => item.id == 1)
+    document.write(user.name + '<br>')
+    document.write(users.findIndex(i => i.name == 'Pete') + '<br>')
+    document.write(users.findLastIndex(i => i.name == 'John') + '<br>')
+    //匹配多个元素,返回的是一个数组
+    document.write(users.filter(i => i.name == 'John').length + '<br>')
+    let lengths = ['Bilbo', 'Gandalf', 'Nazgul'].map(item => item.length)
+    document.write(lengths + '<br>')
+</script>
 </body>
 </html>
