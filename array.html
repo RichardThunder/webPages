@@ -2,7 +2,7 @@
  * @Author: yuetingpei yuetingpei888@gmail.com
  * @Date: 2023-08-26 14:13:03
  * @LastEditors: yuetingpei yuetingpei888@gmail.com
- * @LastEditTime: 2023-08-26 16:42:27
+ * @LastEditTime: 2023-08-28 17:29:55
  * @FilePath: \WebPages\array.html
  * @Description: 
  * Copyright (c) 2023 by yuetingpei888@gmail.com, All Rights Reserved. 
@@ -34,7 +34,7 @@
     })
 */
 
-    let users = [
+/*     let users = [
         { id: 1, name: 'John' },
         { id: 2, name: 'Pete' },
         { id: 3, name: 'Mary' },
@@ -48,6 +48,78 @@
     document.write(users.filter(i => i.name == 'John').length + '<br>')
     let lengths = ['Bilbo', 'Gandalf', 'Nazgul'].map(item => item.length)
     document.write(lengths + '<br>')
+        document.write()
+        arr.reduce */
+
+
+            /* 将 border-left-width 转换成 borderLeftWidth
+    重要程度: 5
+    编写函数 camelize(str) 将诸如 “my-short-string” 之类的由短划线分隔的单词变成骆驼式的 “myShortString”。
+    
+    即：删除所有短横线，并将短横线后的每一个单词的首字母变为大写。
+    
+    示例：
+    
+    camelize("background-color") == 'backgroundColor';
+    camelize("list-style-image") == 'listStyleImage';
+    camelize("-webkit-transition") == 'WebkitTransition';
+    提示：使用 split 将字符串拆分成数组，对其进行转换之后再 join 回来。 */
+
+            // 将 border-left-width 转换成 borderLeftWidth
+            // function camelize(str) {
+            //     let array = str.split('-');
+            //     let newAarray = array.map((item, index) => {
+            //         if (index === 0) { return item }
+            //         else { return item[0].toUpperCase() + item.slice(1) }
+            //     })
+            //     return newArray.join("")
+            // }
+            /*             function camelize(str) {
+                            let array = str.split('-')
+                            let newArray = array.map((item, index) => {
+                                if (index === 0) {
+                                    return item
+                                }
+                                else {
+                                    return item[0].toUpperCase() + item.slice(1)
+                                }
+                            })
+                            return newArray.join("")
+                        } */
+            /* 
+            function camelize(str) {
+                return array = str.split('-').map((item, index) => {
+                    if (index === 0)
+                        return item
+                    else
+                        return item[0].toUpperCase()+item.slice(1)
+                }).join('')
+            
+                function camelize(str){
+              let array = str.split('-')
+              let newArray = array.map((item,index)=>{
+                if(index === 0){
+                  return item
+                }
+                else{
+                  return item[0].toUpperCase()+ item.slice(1)
+                }
+              })
+              return newArray.join("")
+            }
+            } */
+            function camelize(str) {
+                return str.split('-').map((item, index) => {
+                    return index === 0 ? item : item[0].toUpperCase() + item.slice(1)
+                })
+                    .join("")
+            }
+
+            string = "-background-color-list-style-image"
+            document.write(camelize("background-color") + "<br>")
+            document.write(camelize("list-style-image") + "<br>")
+            document.write(camelize(string))
+
 </script>
 </body>
 </html>
