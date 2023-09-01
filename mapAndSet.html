@@ -1,0 +1,47 @@
+<!--
+ * @Author: yuetingpei yuetingpei888@gmail.com
+ * @Date: 2023-09-01 14:59:17
+ * @LastEditors: yuetingpei yuetingpei888@gmail.com
+ * @LastEditTime: 2023-09-01 16:02:11
+ * @FilePath: \WebPages\mapAndSet.html
+ * @Description: 
+ * Copyright (c) 2023 by yuetingpei888@gmail.com, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //过滤数组中的唯一元素
+        function unique(arr) {
+            return Array.from(new Set(arr))
+        }
+        //过滤字谜（anagrams）
+        function aclean(arr) {
+            let map = new Map()
+            for (let word of arr) {
+                let sorted = word.toLowerCase()
+                    .split('')
+                    .sort()
+                    .join('')
+                map.set(sorted, word)
+            }
+            return Array.from(map.values())
+        }
+        //迭代键
+        let map = new Map()
+        map.set('name', 'John')
+        let keys = Array.from(map.keys())
+        keys.push("more")
+
+
+    </script>
+</body>
+
+</html>
