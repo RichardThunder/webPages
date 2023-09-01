@@ -2,7 +2,7 @@
  * @Author: yuetingpei yuetingpei888@gmail.com
  * @Date: 2023-08-26 14:13:03
  * @LastEditors: yuetingpei yuetingpei888@gmail.com
- * @LastEditTime: 2023-08-28 17:29:55
+ * @LastEditTime: 2023-09-01 13:25:16
  * @FilePath: \WebPages\array.html
  * @Description: 
  * Copyright (c) 2023 by yuetingpei888@gmail.com, All Rights Reserved. 
@@ -86,8 +86,8 @@
                             })
                             return newArray.join("")
                         } */
-            /* 
-            function camelize(str) {
+
+/*     function camelize(str) {
                 return array = str.split('-').map((item, index) => {
                     if (index === 0)
                         return item
@@ -95,7 +95,7 @@
                         return item[0].toUpperCase()+item.slice(1)
                 }).join('')
             
-                function camelize(str){
+        function camelize(str) {
               let array = str.split('-')
               let newArray = array.map((item,index)=>{
                 if(index === 0){
@@ -108,7 +108,7 @@
               return newArray.join("")
             }
             } */
-            function camelize(str) {
+            /* function camelize(str) {
                 return str.split('-').map((item, index) => {
                     return index === 0 ? item : item[0].toUpperCase() + item.slice(1)
                 })
@@ -118,7 +118,118 @@
             string = "-background-color-list-style-image"
             document.write(camelize("background-color") + "<br>")
             document.write(camelize("list-style-image") + "<br>")
-            document.write(camelize(string))
+            document.write(camelize(string)) */
+
+                /* function filterRange(arr, a, b) {
+                    return arr.filter(item => (item >= a && item <= b))
+                }
+
+                function filterRange(arr, a, b) {
+                    let result = []
+                    arr.forEach(element => {
+                        if (element >= a && element <= b)
+                            result.push(element)
+                    })
+                    1234
+
+
+                    return result
+                } */
+                /* function filterRangeInPlace(arr, a, b) {
+                    for (let i = 0; i < arr.length; ++i) {
+                        if (arr[i] < a || arr[i] > b) {
+                            arr.splice(i, 1)
+                            --i
+                        }
+                    }
+                } */
+                /* //降序排列
+                arr.sort((a, b) => b - a) */
+
+                /* //复制和排序数组 我们有一个字符串数组 arr。我们希望有一个排序过的副本，但保持 arr 不变。
+                //创建一个函数 copySorted(arr) 返回这样一个副本。
+                function copySorted(arr) {
+                    return arr.slice().sort()
+                } */
+
+                //
+                //创建一个构造函数 Calculator，以创建“可扩展”的 calculator 对象。
+                /* function Calculator(str) {
+                    this.methods = {
+                        '+': (a, b) => a + b,
+                        '-': (a, b) => a - b,
+                    };
+                    this.calculate = function (str) {
+                        let split = str.split(' '),
+                            a = +split[0],
+                            op = split[1],
+                            b = +split[2]
+                        if (!this.methods[op] || isNaN(a) || isNaN(b)) {
+                            return NaN
+                        }
+                        return this.methods[op](a, b)
+                    }
+                    this.addMethod = function (name, func) {
+                        this.methods[name] = func
+                    }
+                } */
+                /*  //映射到 names你有一个 user 对象数组，每个对象都有 user.name。编写将其转换为 names 数组的代码。
+                 let john = { name: "John", age: 25 };
+                 let pete = { name: "Pete", age: 30 };
+                 let mary = { name: "Mary", age: 28 };
+                 let users = [john, pete, mary];
+                 let names = users.map((item) => item.name);
+                 alert(names);
+              */
+                /*//映射到对象你有一个 user 对象数组，每个对象都有 name，surname 和 id。编写代码以该数组为基础，创建另一个具有 id 和 fullName 的对象数组，其中 fullName 由 name 和 surname 生成。
+                 let john = { name: "John", surname: "Smith", id: 1 };
+                 let pete = { name: "Pete", surname: "Hunt", id: 2 };
+                 let mary = { name: "Mary", surname: "Key", id: 3 };
+                 let users = [john, pete, mary];
+                 let usersMapped = users.map(item =>
+                 ({ //JavaScript 在这里会把 { 视为函数体的开始，而不是对象的开始。解决方法是将它们包装在普通括号 () 中：
+                     id: item.id,
+                     fullName: item.name + ' ' + item.surname
+                 })) */
+
+                /* function sortByAge(users) {
+                    user.sort((a, b) => a.age - b.age)
+                } */
+
+
+                /* function shuffle(array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        let j = Math.floor(Math.random() * (i + 1));
+                        [array[j], array[i]] = [array[i], array[j]]
+                    }
+                } */
+                /* function getAverageAge(users) {
+                    let n = user.length
+                    return user.reduce((avg, item) => prev += item.age, 0) / users.length
+                } */
+                function unique(arr) {
+                    let result = []
+                    for (let str of arr) {
+                        if (!result.includes(str)) {
+                            result.push(str)
+                        }
+                    }
+                    return result
+                }
+                //从数组创建键（值）对象
+                function groupById(arr) {
+                    let result = {}
+                    arr.forEach(element => {
+                        result[element.id] = element
+                    });
+                    return result
+                }
+                function groupById(arr) {
+                    return arr.reduce((obj, value) => {
+                        obj[value.id] = value
+                        return obj
+                    }, {})
+                }
 
 </script>
 </body>
