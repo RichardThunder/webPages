@@ -2,7 +2,7 @@
  * @Author: yuetingpei yuetingpei888@gmail.com
  * @Date: 2023-09-01 14:59:17
  * @LastEditors: yuetingpei yuetingpei888@gmail.com
- * @LastEditTime: 2023-09-01 16:02:11
+ * @LastEditTime: 2023-09-04 10:21:57
  * @FilePath: \WebPages\mapAndSet.html
  * @Description: 
  * Copyright (c) 2023 by yuetingpei888@gmail.com, All Rights Reserved. 
@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <script>
+<!--     <script>
         //过滤数组中的唯一元素
         function unique(arr) {
             return Array.from(new Set(arr))
@@ -39,9 +39,60 @@
         map.set('name', 'John')
         let keys = Array.from(map.keys())
         keys.push("more")
+</script> -->
+<!-- <script>
+    WeakMap.set(john, "secret documents")
+    let visitsCountMap = new WeakMap()
+    function countUser(user) {
+        let count = visitsCountMap.get(user) || 0
+        visitsCountMap.set(user, count + 1)
+    }
+
+                        let messages = [
+                        { text: "Hello", from: "John" },
+                        { text: "How goes?", from: "John" },
+                        { text: "See you soon", from: "Alice" }
+                        ];
+                        
+                        let readMessages = new WeakMap()
+                        readMessages.set(messages[0], new Date(2023, 9, 3))
+                        
+                        //我们有一个带有价格的对象，并想将它们加倍：
+                        let prices = {
+                        banana: 1,
+                        orange: 2,
+                        meat: 4,
+                        }
+                        let doublePrice = Object.fromEntries(
+                        object.entries(prices).map(entry => [entry[0], entry[1] * 2])
+                        )
+                        </script> -->
+                        <script>
+                            let salaries = {
+                                "John": 100,
+                                "Pete": 300,
+                                "Mary": 250
+                            }
+                            function sumSalaries(s) {
+                                sum = 0
+                                for (let v of Object.values(s)) {
+                                    sum += v
+                                }
+                                return sum
+                            }
+                            //alert(sumSalaries(salaries));
+                            let user = {
+                                name: 'John',
+                                age: 30
+                            };
+
+                            function count(object) {
+                                return Object.keys(object).length
+                            }
 
 
-    </script>
+                            alert(count(user)); // 2
+</script>
 </body>
 
 </html>
