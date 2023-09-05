@@ -2,7 +2,7 @@
  * @Author: yuetingpei yuetingpei888@gmail.com
  * @Date: 2023-09-04 13:59:33
  * @LastEditors: yuetingpei yuetingpei888@gmail.com
- * @LastEditTime: 2023-09-04 16:41:01
+ * @LastEditTime: 2023-09-05 16:26:11
  * @FilePath: \WebPages\date.html
  * @Description: 
  * Copyright (c) 2023 by yuetingpei888@gmail.com, All Rights Reserved. 
@@ -21,12 +21,77 @@
     <script>
         /*         let now = new Date()
                 alert(now) */
-        let Jan01_1970 = new Date(0)
+/*         let Jan01_1970 = new Date(0)
         document.write(Jan01_1970 + '<br>')
         let today = new Date();
         let now = new Date().getTime()
         document.write(now + '<br>')
-        document.write(Date.now() + '<br>')
+        document.write(Date.now() + '<br>') */
+            // let date = new Date(2012, 1, 20, 3, 12)
+            // document.write(date + '<br>')
+            function getWeekDay(date) {
+                let days = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']
+                return days[date.getDay()]
+            }
+
+            function getLocalDay(date) {
+                let days = [7, 1, 2, 3, 4, 5, 6]
+                return days[date.getDay()]
+            }
+            function getDayAgo(date, days) {
+                let newDate = new Date(date)
+                newDate.setDate(date.getDate() - days)
+                return newDate.getDate()
+            }
+            function getLastDayOfMonth(year, month) {
+                let nextMonth = new Date(year, month + 1, 1)
+                nextMonth.setDate(nextMonth.getDate() - 1)
+                return nextMonth.getDate()
+            }
+            function getSecondsToday() {
+                let todayBegin = new Date()
+                todayBegin.setHours(0, 0, 0, 0)
+                let now = new Date()
+                return Math.round((now - todayBegin) / 1000)
+            }
+            // document.write(getSecondsToday() + '<br>') 
+            function getSecondsToTomorrow() {
+                /* let todayBegin = new Date()
+                todayBegin.setHours(0, 0, 0, 0)
+                todayBegin.setDate(todayBegin.getDate() + 1)
+                return Math.round((todayBegin - new Date()) / 1000) */
+                let now = new Date()
+                let tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1)
+                return Math.round((tomorrow - now) / 1000)
+            }
+            document.write(getSecondsToTomorrow() + '<br>')
+            function formatDate(date) {
+                let now = new Date()
+                diff = now - date
+                if (diff < 1000)
+                    return 'right now'
+                else if (diff < 1000 * 60) {
+                    return `${Math.round(diff / 1000)} sec. ago`
+                }
+                else if (diff < 1000 * 60 * 60) {
+                    return `${Math.round(diff / 60000)} min. ago`
+                }
+                else {
+                    let d = date
+                    d = [
+                        '0' + d.getDate(),
+                        '0' + (d.getMonth() + 1),
+                        '' + d.getFullYear(),
+                        '0' + d.getHours(),
+                        '0' + d.getMinutes()
+                    ].map(component => component.slice(-2))
+                    return d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':')
+                }
+            }
+            document.write(formatDate(new Date(new Date - 1)) + '<br>')
+            document.write(formatDate(new Date(new Date - 30 * 1000)) + '<br>')
+            document.write(formatDate(new Date(new Date - 5 * 60 * 1000)) + '<br>')
+            document.write(formatDate(new Date(new Date - 86400 * 1000)) + '<br>')
     </script>
 </body>
 
