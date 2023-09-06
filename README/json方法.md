@@ -83,7 +83,7 @@ JSON.stringify(meetup); // Error: Converting circular structure to JSON
 **此特性可以避免循环引用的对象被编码**
 
 ```javascript
-et room = {
+let room = {
   number: 23
 };
 
@@ -139,5 +139,18 @@ toJSON 既可以用于直接调用 JSON.stringify(obj) 也可以用于当 obj �
 ## JSON.parse
 
 要解码 JSON 字符串，我们需要另一个方法 JSON.parse。
-
 `let value = JSON.parse(str, [reviver]);`
+`str`
+要解析的 JSON 字符串。
+`reviver`
+可选的函数 function(key,value)，该函数将为每个 (key, value) 对调用，并可以对值进行转换。
+```javascript
+let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
+
+let meetup = JSON.parse(str, function(key, value) {
+  if (key == 'date') return new Date(value);
+  return value;
+});
+```
+将 reviver 函数传递给 JSON.parse 作为第二个参数，该函数按照“原样”返回所有值， date 会变成 Date
+- reviver也适用于嵌套对象
