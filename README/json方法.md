@@ -130,3 +130,14 @@ space 参数专门用于调整出更美观的输出。
     }
 }
 ```
+
+## 自定义 “toJSON”
+
+对象也可以提供 toJSON 方法来进行 JSON 转换。如果可用，JSON.stringify 会自动调用它。
+toJSON 既可以用于直接调用 JSON.stringify(obj) 也可以用于当 obj 嵌套在另一个编码对象中时。
+
+## JSON.parse
+
+要解码 JSON 字符串，我们需要另一个方法 JSON.parse。
+
+`let value = JSON.parse(str, [reviver]);`
