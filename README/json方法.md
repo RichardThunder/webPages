@@ -2,7 +2,7 @@
  * @Author: yuetingpei yuetingpei888@gmail.com
  * @Date: 2023-09-06 08:47:08
  * @LastEditors: yuetingpei yuetingpei888@gmail.com
- * @LastEditTime: 2023-09-06 10:20:52
+ * @LastEditTime: 2023-09-08 10:59:32
  * @FilePath: \WebPages\README\json方法.md
  * @Description: 
  * Copyright (c) 2023 by yuetingpei888@gmail.com, All Rights Reserved. 
@@ -144,13 +144,18 @@ toJSON 既可以用于直接调用 JSON.stringify(obj) 也可以用于当 obj �
 要解析的 JSON 字符串。
 `reviver`
 可选的函数 function(key,value)，该函数将为每个 (key, value) 对调用，并可以对值进行转换。
+
 ```javascript
+
 let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
 
 let meetup = JSON.parse(str, function(key, value) {
   if (key == 'date') return new Date(value);
   return value;
 });
+
 ```
+
 将 reviver 函数传递给 JSON.parse 作为第二个参数，该函数按照“原样”返回所有值， date 会变成 Date
+
 - reviver也适用于嵌套对象
