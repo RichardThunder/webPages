@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* function makeCounter() {
+
+            function counter() {
+                return counter.count++;
+            }
+
+            counter.count = 0;
+            counter.set = (value) => counter.count = value;
+            counter.decrease = () => counter.count--;
+            return counter;
+
+        }
+        let counter = makeCounter()
+        document.write(counter() + '<br>')
+        document.write(counter() + '<br>')
+        document.write(counter.set(5) + '<br>')
+        document.write(counter() + '<br>')
+        document.write(counter.decrease() + '<br>')
+        document.write(counter() + '<br>') */
+
+        function sum(params) {
+            let currentSum = params
+            function f(b) {
+                currentSum += b
+                return f
+            }
+            f.toString = () => currentSum
+            return f;
+        }
+        document.write(sum(1)(2) + '<br>')
+        document.write(sum(1)(2)(3) + '<br>')
+        document.write(sum(5)(-1)(2) + '<br>')
+        document.write(sum(6)(-1)(-2)(-3) + '<br>')
+        document.write(sum(0)(1)(2)(3)(4)(5) + '<br>')
+
+    </script>
+</body>
+
+</html>
