@@ -1,0 +1,185 @@
+<!--
+ * @Author: Richard 46419003+RichardThunder@users.noreply.github.com
+ * @Date: 2023-09-13 11:06:52
+ * @LastEditors: Richard 46419003+RichardThunder@users.noreply.github.com
+ * @LastEditTime: 2023-09-14 17:37:00
+ * @FilePath: /webPages/callApplyDecorators.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        "use strict";
+        function slow(x) {
+            //cpu 密集型任务
+            alert(`${x}`);
+            return x;
+        }
+        function cachingDecorator(func) {
+            let cache = new Map();
+
+            return function (x) {
+                if (cache.has(x)) {
+                    return cache.get(x);
+                }
+
+                let result = func(x);
+                cache.set(x, result);
+                return result;
+            };
+        }
+        //slow = cachingDecorator(slow);
+
+        //间谍装饰器
+        //创建一个装饰器 spy(func)，它应该返回一个包装器，该包装器将所有对函数的调用保存在其 calls 属性中。
+        //每个调用都保存为一个参数数组。
+        //例如：
+        /*         function work(a, b) {
+                    alert(a + b);
+                }
+                function spy(func) {
+                    function wrapper(...args) {
+                        wrapper.calls.push(args);
+                        return func.apply(this, args);
+                    }
+                    wrapper.calls = [];
+                    return wrapper;
+        
+                } */
+        /* work = spy(work);
+        work(1, 2);
+        work(4, 5);
+
+        for (let args of work.calls) {
+            alert('call' + args.join());
+        } */
+
+        /*  function f(x) {
+             alert(x);
+         }
+ 
+         function delay(func, ms) {
+             return function wrapper(ms) {
+                 setTimeout(() => func.apply(this, arguments), ms)
+             }
+         }
+  */
+        /*         // create wrappers
+                let f1000 = delay(f, 1000);
+                let f1500 = delay(alert, 1500);
+        
+                f1000("test"); // 在 1000ms 后显示 "test"
+                f1500("tesla"); // 在 1500ms 后显示 "test" */
+
+        /*         function work(a, b) {
+                    alert(a + b); // work 是一个任意的函数或方法
+                }
+        
+                function spy(func) {
+                    function wrapper(...args) {
+                        wrapper.calls.push(args);
+                        return func.apply(this, args);
+                    }
+                    wrapper.calls = [];
+                    return wrapper;
+                } */
+        /*         work = spy(work);
+        
+                work(1, 2); // 3
+                work(4, 5); // 9
+        
+                for (let args of work.calls) {
+                    alert('call:' + args.join()); // "call:1,2", "call:4,5"
+                } */
+
+
+
+        /*         function f(x) {
+                    alert(x);
+                }
+                function delay(func, ms) {
+                    return function f(...message) {
+                        setTimeout(
+                            () => func.apply(this, message), ms)
+                    }
+        
+                }
+                // create wrappers
+                let f1000 = delay(f, 1000);
+                let f1500 = delay(f, 1500);
+        
+                f1000("test"); // 在 1000ms 后显示 "test"
+                f1500("test"); // 在 1500ms 后显示 "test" */
+        //防抖装饰器
+        /* function debounce(func, ms) {
+            let lastTimerId;
+            return function () {
+                clearTimeout(lastTimerId);
+                lastTimerId = setTimeout(() => func.apply(this, arguments), ms);
+            };
+        }
+
+        let f = debounce(alert, 1000);
+
+        f("a");
+        setTimeout(() => f("b"), 200);
+        setTimeout(() => f("c"), 500); */
+        // 防抖函数从最后一次函数调用以后等待 1000ms，然后执行：alert("c")
+
+        //节流装饰器
+
+        function f(a) {
+            console.log(a);
+        }
+
+        function throttle(f, ms) {
+            let isThrottled = false;
+            let savedArgs;
+            let savedthis;
+
+            function wrapper() {
+                if (isThrottled) {
+                    savedArgs = arguments;
+                    savedthis = this;
+                    return;
+                }
+
+                isThrottled = true;
+                f.apply(savedthis, arguments)
+                setTimeout(
+                    function () {
+                        isThrottled = false;
+                        if (savedArgs) {
+                            wrapper.apply(savedthis, savedArgs);
+                            savedArgs = savedthis = null;
+                        }
+                    }, ms)
+            }
+            return wrapper;
+        }
+
+        // f1000 最多每 1000ms 将调用传递给 f 一次
+        let f1000 = throttle(f, 1000);
+
+        f1000(1); // 显示 1
+        f1000(2); // (节流，尚未到 1000ms)
+        f1000(3); // (节流，尚未到 1000ms)
+
+        // 当 1000ms 时间到...
+        // ...输出 3，中间值 2 被忽略
+
+
+
+    </script>
+</body>
+
+</html>
