@@ -1,0 +1,40 @@
+body {
+    background-color: rgb(205, 241, 85);
+    font-family: Arial;
+    font-size: 20px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+/* 全局选择器 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* html元素选择器 */
+h1 {
+    font-size: 40px;
+}
+
+/* 类选择器 */
+.first {
+    color: red;
+}
+
+/* id选择器 */
+#your-name {
+    background-color: rgb(204, 226, 132);
+    border: 10px solid #dc606044;
+    padding: 5px;
+    margin: 10px;
+}
+
+input,
+button {
+    padding: 10px;
+    font-size: 16px;
+}
