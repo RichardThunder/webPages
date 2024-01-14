@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-01-14 23:00:55
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-01-15 02:52:11
+ * @LastEditTime: 2024-01-15 02:55:10
  * @FilePath: \webPages\basic\piggame\script.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -173,8 +173,11 @@ const isWin = function () {
   }
   return false; */
   if(document.getElementById(`score--${currentPlayer}`).textContent >= 20)
-  {document.querySelector(`.player--${currentPlayer}`).classList.add('player--winner');
-  btnHold.disabled=true;
+  {
+    document.querySelector(`.player--${currentPlayer}`).classList.add('player--winner');
+    document.querySelector(`.player--${currentPlayer}`).classList.remove('player--active');
+    
+    btnHold.disabled=true;
   btnRoll.disabled=true;
   return true;}
   else
