@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-01-09 01:21:28
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-01-14 23:54:36
+ * @LastEditTime: 2024-01-15 03:15:08
  * @FilePath: /webPages/basic/guessmynumber/script.js
  * @Description: 
  * 

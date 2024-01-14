@@ -2,15 +2,15 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-01-14 23:00:55
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-01-15 02:55:10
- * @FilePath: \webPages\basic\piggame\script.js
+ * @LastEditTime: 2024-01-15 03:15:58
+ * @FilePath: /webPages/basic/piggame/script.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 'use strict';
-let totalScores=[0,0];
+let totalScores = [0, 0];
 /* let currentScore1 = 0;
 let currentScore2 = 0; */
-let currentScore=0;
+let currentScore = 0;
 let diceScore = 0;
 let currentPlayer = 0;
 const diceEl = document.querySelector('.dice');
@@ -25,7 +25,7 @@ const rollDice = function () {
   console.log('invoke rollDice');
   let score = Math.trunc(Math.random() * 6 + 1);
   console.log(score);
-  diceEl.src=`dice-${score}.png`;
+    diceEl.src = `dice-${score}.png`;
   /* switch (score) {
     case 1:
       document.querySelector('img').src = 'dice-1.png';
@@ -77,21 +77,21 @@ const rollDice = function () {
     }
   } */
   if (score === 1) {
-    currentScore=0;
+      currentScore = 0;
     document.getElementById(`current--${currentPlayer}`).textContent = 0;
-    currentPlayer = currentPlayer===0 ? 1:0;
+      currentPlayer = currentPlayer === 0 ? 1 : 0;
     play0El.classList.toggle('player--active');
     play1El.classList.toggle('player--active');
-  }
-  else{
+  } else {
     currentScore += score;
-    document.getElementById(`current--${currentPlayer}`).textContent = currentScore;
+      document.getElementById(`current--${currentPlayer}`).textContent =
+          currentScore;
   }
 };
 //更新total后做判断胜利, 如果胜利那么就不清零 否则清零并交换控制
 const hold = function () {
   console.log('invoke hold');
- /*  if (currentPlayer === 1) {
+  /*  if (currentPlayer === 1) {
     totalScore1 += currentScore1;
     document.getElementById('score--0').textContent = totalScore1;
     if (isWin()) return;
@@ -114,19 +114,20 @@ const hold = function () {
     sec[1].classList.remove('player--active');
     sec[0].classList.add('player--active');
   } */
-    totalScores[currentPlayer]+=currentScore
-    document.getElementById(`score--${currentPlayer}`).textContent = totalScores[currentPlayer];
+    totalScores[currentPlayer] += currentScore;
+    document.getElementById(`score--${currentPlayer}`).textContent =
+        totalScores[currentPlayer];
     if (isWin()) return;
-    currentScore=0;
-    document.getElementById(`current--${currentPlayer}`).textContent=0;
-    currentPlayer = currentPlayer === 0 ? 1:0;
+    currentScore = 0;
+    document.getElementById(`current--${currentPlayer}`).textContent = 0;
+    currentPlayer = currentPlayer === 0 ? 1 : 0;
     play0El.classList.toggle('player--active');
     play1El.classList.toggle('player--active');
 };
 
 const reset = function () {
   console.log('invoke reset');
- /*  currentScore1 = 0;
+  /*  currentScore1 = 0;
   currentScore2 = 0;
   totalScore1 = 0;
   totalScore2 = 0;
@@ -143,13 +144,13 @@ const reset = function () {
   btns[1].disabled = false;
   btns[2].disabled = false;
   diceEl.classList.add('hidden'); */
-    currentScore=0;
-    totalScores=[0,0];
-    currentPlayer=0;
-    document.getElementById('current--0').textContent =0;
-    document.getElementById('current--1').textContent =0;
-    document.getElementById('score--0').textContent=0;
-    document.getElementById('score--1').textContent=0;
+    currentScore = 0;
+    totalScores = [0, 0];
+    currentPlayer = 0;
+    document.getElementById('current--0').textContent = 0;
+    document.getElementById('current--1').textContent = 0;
+    document.getElementById('score--0').textContent = 0;
+    document.getElementById('score--1').textContent = 0;
     play0El.className = 'player player--0 player--active';
     play1El.className = 'player player--1';
     btnHold.disabled = false;
@@ -172,16 +173,18 @@ const isWin = function () {
     return true;
   }
   return false; */
-  if(document.getElementById(`score--${currentPlayer}`).textContent >= 20)
-  {
-    document.querySelector(`.player--${currentPlayer}`).classList.add('player--winner');
-    document.querySelector(`.player--${currentPlayer}`).classList.remove('player--active');
-    
-    btnHold.disabled=true;
-  btnRoll.disabled=true;
-  return true;}
-  else
-  return false;
+    if (document.getElementById(`score--${currentPlayer}`).textContent >= 20) {
+        document
+            .querySelector(`.player--${currentPlayer}`)
+            .classList.add('player--winner');
+        document
+            .querySelector(`.player--${currentPlayer}`)
+            .classList.remove('player--active');
+
+        btnHold.disabled = true;
+        btnRoll.disabled = true;
+        return true;
+    } else return false;
 };
 
 console.log(document.querySelector('.btn--roll'));
