@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-01-17 02:00:58
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-01-22 04:05:01
+ * @LastEditTime: 2024-01-23 16:03:41
  * @FilePath: /webPages/basic/09-Data-Structures-Operators/starter/script.js
  * @Description: 
  * 
@@ -49,7 +49,6 @@ const restaurant = {
         console.log(
             mainIngredient, ...restIngredient
         );
-
     },
 };
 restaurant.oderDelivery({
@@ -60,8 +59,31 @@ restaurant.oderDelivery({
 });
 
 
+const oderSet = new Set(['Pasta','Pizza','Pizza','Risotto','Pizza',]);
+console.log(oderSet);
+console.log(oderSet.size);
+console.log(oderSet.has('Pizza')); //return Boolean
+console.log(oderSet.add('Garlic Bread')); //return new set
+console.log(oderSet.add('Garlic Bread')); //return new set
+console.log(oderSet.delete('Risotto')); // return Boolean
+//console.log(oderSet.clear()); //clear all elements, return undefined
+
+//迭代器访问set
+for(const oder of oderSet) console.log(oder);
+
+const staff=['Waiter','Chef','Waiter','Manager','Chef','Waiter'];
+
+//生成唯一的set, 然后展开成数组
+const staffUnique = [...new Set(staff)]; // ['Waiter', 'Chef', 'Manager']
+console.log(staffUnique);
+console.log(new Set(
+    ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
+);
+//字符串也是可迭代的, 检查字符串中有多少中字符
+console.log(new Set('yuetingpeisname').size); // 11
+
 //在对象中, 元素的位置不重要,所以可以不顾顺序
-const { name, openingHours, categories } = restaurant;
+/* const { name, openingHours, categories } = restaurant;
 console.log(name, openingHours, categories);
 
 const arr = [1, 2, ...[3, 4]];
@@ -73,7 +95,7 @@ console.log(pizza, risotto, otherFood);
 
 const { sat, ...weekdays } = restaurant.openingHours;
 console.log(sat);
-console.log(weekdays);
+console.log(weekdays); */
 /* //更改变量名称 解构运算符 {}
 const { name: restaurantName, openingHours: hours, categories: tags } = restaurant;
 console.log(restaurantName, hours, tags);
@@ -110,7 +132,7 @@ console.log(...newArr); //展开数组
 
 //复制数组 浅拷贝
 const menus = [...restaurant.mainMenu, ...restaurant.starterMenu];
-console.log(menus);
+     console.log(menus);
 
 //扩展运算符可用于可迭代对象, arrays, strings, maps, sets, 没有对象
 const str = 'yuetingpei';
@@ -212,7 +234,7 @@ const guests = num ?? 10;
 console.log(guests);//10
  */
 
-/* const game = {
+ /* const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
   players: [
@@ -252,8 +274,8 @@ console.log(guests);//10
     team2: 6.5,
   },
 };
-
-
+ */
+/*
 const [players1,players2] = game.players;
 console.log(players1,players2);
 let [gk,...players1Final] =players1;
@@ -345,7 +367,7 @@ team1 > team2 && console.log('Team 2 is more likely to win');
 
 
 
-const menu=[...restaurant.starterMenu,...restaurant.mainMenu];
+/* const menu=[...restaurant.starterMenu,...restaurant.mainMenu];
 //循环数组内的元素
 for(const item of menu){
     console.log(item);
@@ -357,8 +379,8 @@ for(const [i,el] of menu){
 }
 
 //?. 与 ??
-//console.log(restaurant.order(0,1)?? 'Method doesnt exist');
-//console.log(restaurant.orderRisotto(0,1)?? 'Method doesnt exist');
+//console.log(restaurant?.order(0,1)?? 'Method doesnt exist');
+//console.log(restaurant?.orderRisotto(0,1)?? 'Method doesnt exist');
 
 const user=[];
 console.log(user[0]?.name??'user array empty');
@@ -375,4 +397,55 @@ console.log(Object.values(openingHours));
 
 for (const [key,{open,close}] of Object.entries(openingHours)){
     console.log(`on ${key}, we open at ${open} and close at ${close}`);
+} */
+
+
+
+///////////////////////////////////////
+// Coding Challenge #2
+
+/* 
+Let's continue with our football betting app!
+
+1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
+2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
+3. Print the 3 odds to the console, but in a nice formatted way, exaclty like this:
+      Odd of victory Bayern Munich: 1.33
+      Odd of draw: 3.25
+      Odd of victory Borrussia Dortmund: 6.5
+Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names 😉
+
+BONUS: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this:
+      {
+        Gnarby: 1,
+        Hummels: 1,
+        Lewandowski: 2
+      }
+
+GOOD LUCK 😀
+*/
+
+/* const goals = game.scored.entries();
+for (const [seq, name] of game.scored.entries()) {
+  console.log(`Goal ${seq + 1}: ${name}`);
 }
+
+const averageOdd = function(...odds){
+    let sum =0;
+    for(const odd of odds)
+    sum += odd;
+    console.log(sum/odds.length);
+}
+averageOdd(game.odds.team1,game.odds.team2,game.odds.x);
+
+for(const [name,odd] of Object.entries(game.odds)){
+    console.log(`Odd of victory ${game[name]??'draw'}: ${odd}`);
+}
+
+
+const scores ={};
+for(const name of game.scored){
+    scores[name]? scores[name]++ : (scores[name]=1);
+}
+console.log(scores);
+ */
