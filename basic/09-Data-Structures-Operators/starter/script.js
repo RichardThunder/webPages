@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-01-17 02:00:58
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-01-23 16:03:41
+ * @LastEditTime: 2024-01-25 15:50:14
  * @FilePath: /webPages/basic/09-Data-Structures-Operators/starter/script.js
  * @Description: 
  * 
@@ -51,15 +51,34 @@ const restaurant = {
         );
     },
 };
-restaurant.oderDelivery({
-    time: '20:00',
-    address: 'via st. No.3',
-    mainIndex: 1,
-    starterIndex: 2,
-});
+// restaurant.oderDelivery({
+//     time: '20:00',
+//     address: 'via st. No.3',
+//     mainIndex: 1,
+//     starterIndex: 2,
+// });
+
+//map
+const rest = new Map();
+rest.set('name','Classico Italiano');
+rest.set(1,'Firenze Italy');
+console.log(rest.set(2,'Lisbon, Portugal'));
+rest.set('');
+
+//调用set方法会返回map对象, 因此可以使用链式调用.如下
+rest
+.set('catagories',['Italian','Pizzera','vegetarian','Organic'])
+.set('open',11)
+.set('close',23)
+.set(true,'We are open :D')
+.set(false,'We are closed :(');
+
+//使用boolean进行判断 get方法是严格匹配类型的, 
+const time =8;
+console.log(rest.get(time>rest.get('open')&&time<rest.get('close')));
 
 
-const oderSet = new Set(['Pasta','Pizza','Pizza','Risotto','Pizza',]);
+/* const oderSet = new Set(['Pasta','Pizza','Pizza','Risotto','Pizza',]);
 console.log(oderSet);
 console.log(oderSet.size);
 console.log(oderSet.has('Pizza')); //return Boolean
@@ -80,7 +99,7 @@ console.log(new Set(
     ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
 );
 //字符串也是可迭代的, 检查字符串中有多少中字符
-console.log(new Set('yuetingpeisname').size); // 11
+console.log(new Set('yuetingpeisname').size); // 11 */
 
 //在对象中, 元素的位置不重要,所以可以不顾顺序
 /* const { name, openingHours, categories } = restaurant;
