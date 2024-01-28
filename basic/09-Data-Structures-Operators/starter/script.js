@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-01-17 02:00:58
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-01-25 15:50:14
+ * @LastEditTime: 2024-01-28 23:53:19
  * @FilePath: /webPages/basic/09-Data-Structures-Operators/starter/script.js
  * @Description: 
  * 
@@ -51,6 +51,9 @@ const restaurant = {
         );
     },
 };
+
+
+
 // restaurant.oderDelivery({
 //     time: '20:00',
 //     address: 'via st. No.3',
@@ -59,23 +62,130 @@ const restaurant = {
 // });
 
 //map
-const rest = new Map();
-rest.set('name','Classico Italiano');
-rest.set(1,'Firenze Italy');
-console.log(rest.set(2,'Lisbon, Portugal'));
-rest.set('');
+// const rest = new Map();
+// rest.set('name','Classico Italiano');
+// rest.set(1,'Firenze Italy');
+// console.log(rest.set(2,'Lisbon, Portugal'));
+// rest.set('');
 
 //调用set方法会返回map对象, 因此可以使用链式调用.如下
-rest
-.set('catagories',['Italian','Pizzera','vegetarian','Organic'])
-.set('open',11)
-.set('close',23)
-.set(true,'We are open :D')
-.set(false,'We are closed :(');
+// rest
+// .set('catagories',['Italian','Pizzera','vegetarian','Organic'])
+// .set('open',11)
+// .set('close',23)
+// .set(true,'We are open :D')
+// .set(false,'We are closed :(');
 
-//使用boolean进行判断 get方法是严格匹配类型的, 
-const time =8;
-console.log(rest.get(time>rest.get('open')&&time<rest.get('close')));
+// //使用boolean进行判断 get方法是严格匹配类型的, 
+// const time =8;
+// console.log(rest.get(time>rest.get('open')&&time<rest.get('close')));
+// console.log(rest.has('categories')); //false  typo catagories
+// console.log(rest.delete(2)); //boolean true
+// console.log(rest); //Map(8)
+// console.log(rest.size); //8
+// console.log(rest.clear()); // undefined
+
+// //直接用数组, 会访问不到,因为不是一个对象
+// rest.set([1,2],'Test');
+// console.log(rest.get([1,2])); //undefined
+
+// //将传入数组对象的引用
+// const arr = [1,2];
+// rest.set(arr, 'Test');
+// console.log(rest.get(arr)); //Test
+
+// rest.set(document.querySelector('h1'), 'Heading');
+// console.log(rest);
+// console.log(rest.size);
+
+
+//将对象转换为map Object.entries() 会将对象转换为二维数组形式, 可以直接使用map的构造器构造成map
+// console.log(Object.entries(restaurant.openingHours)); // [Array(2), Array(2), Array(2)]
+// const hoursMap = new Map(Object.entries(restaurant.openingHours));
+// console.log(hoursMap); //Map(3) {'thu' => {…}, 'fri' => {…}, 'sat' => {…}}
+
+// const question = new Map([
+//     ['question','What is the best programming language?'],
+//     [1,'C'],
+//     [2,'java'],
+//     [3,'javascript'],
+//     ['correct',3],
+//     [true,'Correct'],
+//     [false,'try again']
+// ])
+
+// console.log(question.get('question'));
+// for(const[key,value]of question){
+//     if(typeof key === 'number') console.log(`Answer ${key}:${value}`);
+// }
+
+// const answer=Number(prompt('Your answer'));
+// console.log(answer);
+// console.log(question.get(answer===question.get('correct')));
+
+//展开map为二维数组 
+// console.log([...question]); //[Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
+// console.log(question.entries());
+// console.log(question.keys()); //{'question', 1, 2, 3, 'correct', …}
+// console.log([...question.keys()]); //将对象展开成数组 ['question', 1, 2, 3, 'correct', true, false]
+// console.log(question.values()); //{'What is the best programming language?', 'C', 'java', 'javascript', 3, …}
+
+
+///////////////////////////////////////
+// Coding Challenge #3
+
+/* 
+Let's continue with our football betting app! This time, we have a map with a log of the events 
+that happened during the game. The values are the events themselves, and the keys are the minutes 
+in which each event happened (a football game has 90 minutes plus some extra time).
+
+1. Create an array 'events' of the different game events that happened (no duplicates)
+2. After the game has finished, is was found that the yellow card from minute 64 was unfair. 
+So remove this event from the game events log.
+3. Print the following string to the console: "An event happened, on average, every 9 minutes"
+ (keep in mind that a game has 90 minutes)
+4. Loop over the events and log them to the console, marking whether it's in the first half or 
+second half (after 45 min) of the game, like this:
+      [FIRST HALF] 17: ⚽️ GOAL
+
+GOOD LUCK 😀
+*/
+
+// const gameEvents = new Map([
+//   [17, '⚽️ GOAL'],
+//   [36, '🔁 Substitution'],
+//   [47, '⚽️ GOAL'],
+//   [61, '🔁 Substitution'],
+//   [64, '🔶 Yellow card'],
+//   [69, '🔴 Red card'],
+//   [70, '🔁 Substitution'],
+//   [72, '🔁 Substitution'],
+//   [76, '⚽️ GOAL'],
+//   [80, '⚽️ GOAL'],
+//   [92, '🔶 Yellow card'],
+// ]);
+
+// //1
+// const events=new Set([...gameEvents.values()])
+// console.log(events);
+// //2.
+// gameEvents.delete(64);
+// console.log(gameEvents);
+// //3.
+// console.log(`An event happened, on average, every ${90/gameEvents.size} minutes`);
+
+// const finalTime=[...gameEvents.keys()].pop();
+// console.log(
+//   `An event happened, on average, every ${finalTime / gameEvents.size} minutes`
+// );
+
+// //4.
+// console.log(gameEvents.entries());
+
+// for(const [key,value] of gameEvents.entries()){
+//     key <= 45 && console.log(`[FIRST HALF] ${key}: ${value}`);
+//     key > 45 && console.log(`[SECOND HALF] ${key}: ${value}`);
+// }
 
 
 /* const oderSet = new Set(['Pasta','Pizza','Pizza','Risotto','Pizza',]);
@@ -468,3 +578,26 @@ for(const name of game.scored){
 }
 console.log(scores);
  */
+const airline = 'TAP Air Protugal';
+const plane = 'A320';
+
+//下标访问字符串
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+console.log(plane[3]);
+
+//字符串可以直接使用对象方法
+console.log('B737'[0]);
+
+//字符串长度
+console.log(airline.length);
+console.log('B737'.length);
+
+//indexOf() 返回第一次出现的位置
+console.log(airline.indexOf('A')); // 1
+
+//lastIndexOf() 返回最后一次出现的位置
+ 
+
+
