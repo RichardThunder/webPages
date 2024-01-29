@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-01-17 02:00:58
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-01-28 23:53:19
+ * @LastEditTime: 2024-01-29 21:27:10
  * @FilePath: /webPages/basic/09-Data-Structures-Operators/starter/script.js
  * @Description: 
  * 
@@ -598,6 +598,48 @@ console.log('B737'.length);
 console.log(airline.indexOf('A')); // 1
 
 //lastIndexOf() 返回最后一次出现的位置
- 
+console.log(airline.lastIndexOf('a'));
 
+console.log(airline.slice(4)); //Air Protugal
+console.log(airline.slice(4, 7)); //Air
+
+console.log(airline.slice(0,airline.indexOf(' '))); // 第一个单词
+console.log(airline.slice(airline.lastIndexOf(' ')+1));
+
+console.log(airline.slice(-2));
+console.log(airline.slice(-3));
+console.log(airline.slice(-4));
+
+const checkMiddleSeat = function(seat){
+    //b e are middle seat
+    const s = seat.slice(-1);
+    if(s==='B' || s ==='E')
+    console.log(`It's middle seat.`);
+ else console.log(`not middle seat`);
+ 
+}
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+const passenger='jOnAS';
+console.log(passenger[0].toUpperCase()+passenger.toLowerCase().slice(1));
+
+const email='hello@jonas.io';
+const loginEmail='  Hello@Jonas.Io \n';
+const lowerEmail=loginEmail.toLowerCase();
+const trimmedEmail=lowerEmail.trim();
+console.log(lowerEmail);
+console.log(trimmedEmail);
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+
+
+const isEmail=function(str1,str2){
+    console.log(str1 === str2.toLowerCase().trim());
+}
+isEmail(email,loginEmail)
 
