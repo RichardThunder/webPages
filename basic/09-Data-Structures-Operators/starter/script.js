@@ -2,57 +2,60 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-01-17 02:00:58
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-01-29 21:27:10
+ * @LastEditTime: 2024-01-30 16:04:00
  * @FilePath: /webPages/basic/09-Data-Structures-Operators/starter/script.js
- * @Description: 
- * 
+ * @Description:
+ *
  */
 'use strict';
 
 // Data needed for a later exercise
 const flights =
-    '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
 // Data needed for first part of the section
 const restaurant = {
-    name: 'Classico Italiano',
-    location: 'Via Angelo Tavanti 23, Firenze, Italy',
-    categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
-    starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-    mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
-    openingHours: {
-        thu: {
-            open: 12,
-            close: 22,
-        },
-        fri: {
-            open: 11,
-            close: 23,
-        },
-        sat: {
-            open: 0, // Open 24 hours
-            close: 24,
-        },
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
     },
-    order: function (startIndex, mainIndex) {
-        return [this.starterMenu[startIndex], this.starterMenu[mainIndex]];
+    fri: {
+      open: 11,
+      close: 23,
     },
-    //传入对象时直接解构成变量
-    oderDelivery: function ({ starterIndex = 0, mainIndex = 2, time = '0:0:0', address = ' ' }) {
-        console.log(`delivery ${this.mainMenu[starterIndex]} and ${this.mainMenu[mainIndex]} to ${address} at ${time}`);
+    sat: {
+      open: 0, // Open 24 hours
+      close: 24,
     },
-    orderPasta: function (ing1, ing2, ing3) {
-        console.log(`here is pasta with ${ing1}, ${ing2} and ${ing3}`);
-    },
-    oderPizza: function (mainIngredient, ...restIngredient) {
-        console.log(
-            mainIngredient, ...restIngredient
-        );
-    },
+  },
+  order: function (startIndex, mainIndex) {
+    return [this.starterMenu[startIndex], this.starterMenu[mainIndex]];
+  },
+  //传入对象时直接解构成变量
+  oderDelivery: function ({
+    starterIndex = 0,
+    mainIndex = 2,
+    time = '0:0:0',
+    address = ' ',
+  }) {
+    console.log(
+      `delivery ${this.mainMenu[starterIndex]} and ${this.mainMenu[mainIndex]} to ${address} at ${time}`
+    );
+  },
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`here is pasta with ${ing1}, ${ing2} and ${ing3}`);
+  },
+  oderPizza: function (mainIngredient, ...restIngredient) {
+    console.log(mainIngredient, ...restIngredient);
+  },
 };
-
-
 
 // restaurant.oderDelivery({
 //     time: '20:00',
@@ -76,7 +79,7 @@ const restaurant = {
 // .set(true,'We are open :D')
 // .set(false,'We are closed :(');
 
-// //使用boolean进行判断 get方法是严格匹配类型的, 
+// //使用boolean进行判断 get方法是严格匹配类型的,
 // const time =8;
 // console.log(rest.get(time>rest.get('open')&&time<rest.get('close')));
 // console.log(rest.has('categories')); //false  typo catagories
@@ -97,7 +100,6 @@ const restaurant = {
 // rest.set(document.querySelector('h1'), 'Heading');
 // console.log(rest);
 // console.log(rest.size);
-
 
 //将对象转换为map Object.entries() 会将对象转换为二维数组形式, 可以直接使用map的构造器构造成map
 // console.log(Object.entries(restaurant.openingHours)); // [Array(2), Array(2), Array(2)]
@@ -123,13 +125,12 @@ const restaurant = {
 // console.log(answer);
 // console.log(question.get(answer===question.get('correct')));
 
-//展开map为二维数组 
+//展开map为二维数组
 // console.log([...question]); //[Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
 // console.log(question.entries());
 // console.log(question.keys()); //{'question', 1, 2, 3, 'correct', …}
 // console.log([...question.keys()]); //将对象展开成数组 ['question', 1, 2, 3, 'correct', true, false]
 // console.log(question.values()); //{'What is the best programming language?', 'C', 'java', 'javascript', 3, …}
-
 
 ///////////////////////////////////////
 // Coding Challenge #3
@@ -186,7 +187,6 @@ GOOD LUCK 😀
 //     key <= 45 && console.log(`[FIRST HALF] ${key}: ${value}`);
 //     key > 45 && console.log(`[SECOND HALF] ${key}: ${value}`);
 // }
-
 
 /* const oderSet = new Set(['Pasta','Pizza','Pizza','Risotto','Pizza',]);
 console.log(oderSet);
@@ -250,7 +250,6 @@ const { fri: { open: o = 0, close: c = 10 } } = openingHours;
 console.log(o, c);
  */
 
-
 //扩展运算符 ... 与解构运算符的最大区别就是: 提取出数组中的所有变量, 并不会创建新的变量
 /* const arr = [7, 8, 9];
 const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
@@ -286,7 +285,6 @@ console.log(restaurant.name);
 restaurant.name = ' mike jack';
 console.log(restaurant.name);
 console.log(newRestaurant.name); */
-
 
 //数组的解构运算符 [ ]
 /* const arr = [2, 3, 4];
@@ -363,47 +361,47 @@ const guests = num ?? 10;
 console.log(guests);//10
  */
 
- /* const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
-  players: [
-    [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
-    ],
-    [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
-    ],
-  ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-  date: 'Nov 9th, 2037',
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
+/* const game = {
+ team1: 'Bayern Munich',
+ team2: 'Borrussia Dortmund',
+ players: [
+   [
+     'Neuer',
+     'Pavard',
+     'Martinez',
+     'Alaba',
+     'Davies',
+     'Kimmich',
+     'Goretzka',
+     'Coman',
+     'Muller',
+     'Gnarby',
+     'Lewandowski',
+   ],
+   [
+     'Burki',
+     'Schulz',
+     'Hummels',
+     'Akanji',
+     'Hakimi',
+     'Weigl',
+     'Witsel',
+     'Hazard',
+     'Brandt',
+     'Sancho',
+     'Gotze',
+   ],
+ ],
+ score: '4:0',
+ scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+ date: 'Nov 9th, 2037',
+ odds: {
+   team1: 1.33,
+   x: 3.25,
+   team2: 6.5,
+ },
 };
- */
+*/
 /*
 const [players1,players2] = game.players;
 console.log(players1,players2);
@@ -494,8 +492,6 @@ team1 < team2 && console.log('Team 1 is more likely to win');
 team1 > team2 && console.log('Team 2 is more likely to win');
 */
 
-
-
 /* const menu=[...restaurant.starterMenu,...restaurant.mainMenu];
 //循环数组内的元素
 for(const item of menu){
@@ -527,8 +523,6 @@ console.log(Object.values(openingHours));
 for (const [key,{open,close}] of Object.entries(openingHours)){
     console.log(`on ${key}, we open at ${open} and close at ${close}`);
 } */
-
-
 
 ///////////////////////////////////////
 // Coding Challenge #2
@@ -578,7 +572,7 @@ for(const name of game.scored){
 }
 console.log(scores);
  */
-const airline = 'TAP Air Protugal';
+/* const airline = 'TAP Air Protugal';
 const plane = 'A320';
 
 //下标访问字符串
@@ -641,5 +635,53 @@ console.log(normalizedEmail);
 const isEmail=function(str1,str2){
     console.log(str1 === str2.toLowerCase().trim());
 }
-isEmail(email,loginEmail)
+isEmail(email,loginEmail) */
 
+//replace() 替换
+// const priceGB = '288,97£';
+// const priceUS = priceGB.replace('£', '$').replace(',', '.');
+// console.log(priceUS);
+// //replaceAll()
+// const announcement =
+//   'All pessengers come to barding door 23. Boarding door 23!';
+// console.log(announcement.replaceAll('door', 'gate'));
+
+//regex
+//console.log(announcement.replace(/door/g, 'gate'));
+//boolean
+// const plane = 'Airbus A320neo';
+// console.log(plane.includes('Air'));
+// console.log(plane.includes('adfa'));
+// console.log(plane.endsWith('neo'));
+// if (plane.startsWith('Airbus') && plane.endsWith('neo')) {
+//   console.log('new series');
+// }
+
+// const checkBaggage = function (items) {
+//   const baggage = items.toLowerCase();
+//   if (baggage.includes('knife') || baggage.includes('gun')) {
+//     console.log('you are not allowed to on board!');
+//   } else {
+//     console.log('Welcome aboard!');
+//   }
+// };
+
+// checkBaggage('I have a laptop, some Food and a pocket knife.');
+
+
+//split() and join()
+// console.log('a+very+nice+string'.split('+'));
+// console.log('jike sch'.split(' '));
+// const [firstName, secondName] = 'jike sch'.split(' ');
+// const newName = ['Mr.', firstName[0].toUpperCase()+firstName.slice(1), secondName[0].toUpperCase()+secondName.slice(1)].join(' ');
+// console.log(newName);
+
+const passenger = 'jessica ann smith davis';
+let splitname = passenger.split(' ');
+let newName = [];
+for (const it of splitname) {
+  newName.push(it[0].toUpperCase() + it.slice(1));
+
+  console.log(newName);
+}
+console.log(newName.join(' ')); //Jessica Ann Smith Davis
