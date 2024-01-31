@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-01-17 02:00:58
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-01-31 09:50:27
+ * @LastEditTime: 2024-01-31 16:48:24
  * @FilePath: /webPages/basic/09-Data-Structures-Operators/starter/script.js
  * @Description:
  *
@@ -19,10 +19,9 @@ for (const flight of flights.split('+')) {
     status.startsWith('_Delayed') ? '🚨' : ''
   } ${status.replaceAll('_', ' ')} from ${from
     .slice(0, 3)
-    .toUpperCase()} to ${to.slice(0, 3).toUpperCase()} (${time.replace('+','').replace(':','h')})`.padStart(50);
-
+    .toUpperCase()} to ${to.slice(0, 3).toUpperCase()} (${time.replace('+','').replace(':','h')})`.padStart(45);
   console.log(output);
-}
+} 
 
 // Data needed for first part of the section
 const restaurant = {
