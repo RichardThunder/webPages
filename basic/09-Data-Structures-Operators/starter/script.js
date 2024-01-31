@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-01-17 02:00:58
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-01-30 16:04:00
+ * @LastEditTime: 2024-01-31 09:50:27
  * @FilePath: /webPages/basic/09-Data-Structures-Operators/starter/script.js
  * @Description:
  *
@@ -12,6 +12,17 @@
 // Data needed for a later exercise
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+for (const flight of flights.split('+')) {
+  const [status, from, to, time] = flight.split(';');
+  const output = `${
+    status.startsWith('_Delayed') ? '🚨' : ''
+  } ${status.replaceAll('_', ' ')} from ${from
+    .slice(0, 3)
+    .toUpperCase()} to ${to.slice(0, 3).toUpperCase()} (${time.replace('+','').replace(':','h')})`.padStart(50);
+
+  console.log(output);
+}
 
 // Data needed for first part of the section
 const restaurant = {
@@ -647,8 +658,8 @@ isEmail(email,loginEmail) */
 // console.log(announcement.replaceAll('door', 'gate'));
 
 //regex
-//console.log(announcement.replace(/door/g, 'gate'));
-//boolean
+// console.log(announcement.replace(/door/g, 'gate'));
+// boolean
 // const plane = 'Airbus A320neo';
 // console.log(plane.includes('Air'));
 // console.log(plane.includes('adfa'));
@@ -668,7 +679,6 @@ isEmail(email,loginEmail) */
 
 // checkBaggage('I have a laptop, some Food and a pocket knife.');
 
-
 //split() and join()
 // console.log('a+very+nice+string'.split('+'));
 // console.log('jike sch'.split(' '));
@@ -676,12 +686,94 @@ isEmail(email,loginEmail) */
 // const newName = ['Mr.', firstName[0].toUpperCase()+firstName.slice(1), secondName[0].toUpperCase()+secondName.slice(1)].join(' ');
 // console.log(newName);
 
-const passenger = 'jessica ann smith davis';
-let splitname = passenger.split(' ');
-let newName = [];
-for (const it of splitname) {
-  newName.push(it[0].toUpperCase() + it.slice(1));
+// const passenger = 'jessica ann smith davis';
+// let splitname = passenger.split(' ');
+// let newName = [];
+// for (const it of splitname) {
+//   newName.push(it[0].toUpperCase() + it.slice(1));
 
-  console.log(newName);
-}
-console.log(newName.join(' ')); //Jessica Ann Smith Davis
+//   console.log(newName);
+// }
+// console.log(newName.join(' ')); //Jessica Ann Smith Davis
+
+//padding
+// const message = 'Go to gate 23!';
+// console.log(message.padStart(20, '+')); //++++++Go to gate 23!
+// console.log('Jonas'.padStart(20, '+').padEnd(30, '+')); // +++++++++++++++Jonas++++++++++
+
+//只显示后四位
+// const maskCreditCard = function (number) {
+//   const str = number + ''; //number 转 字符串
+//   const last4 = str.slice(-4);
+//   return last4.padStart(str.length, '*');
+// };
+
+// console.log(maskCreditCard(6463415614561)); //*********4561
+// console.log(maskCreditCard(6465148419641));
+// console.log(maskCreditCard('1456465189486'));
+
+// const message2 = 'Bad weather... All Departues Delayed...';
+// console.log(message2.repeat(5));
+// Bad weather... All Departues Delayed...Bad weather... All Departues Delayed...
+//Bad weather... All Departues Delayed...Bad weather... All Departues Delayed...Bad weather... All Departues Delayed...
+
+// const planesInLine = function (n) {
+//   console.log(`There are ${n} planes in line ${'✈️'.repeat(n)}`);
+// };
+// planesInLine(3); //There are 3 planes in line ✈️✈️✈️
+// planesInLine(12); //There are 12 planes in line ✈️✈️✈️✈️✈️✈️✈️✈️✈️✈️✈️✈️
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+THIS TEST DATA (pasted to textarea)
+underscore_case
+ first_name
+Some_Variable 
+  calculate_AGE
+delayed_departure
+
+SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+someVariable        ✅✅✅
+calculateAge        ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+HINT 1: Remember which character defines a new line in the textarea 😉
+HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+Afterwards, test with your own test data!
+
+GOOD LUCK 😀
+*/
+// document.body.append(document.createElement('textarea'));
+// document.body.append(document.createElement('button'));
+// const textarea = document.querySelector('textarea');
+// const button = document.querySelector('button');
+// button.addEventListener('click', () => {
+//   const text = textarea.value;
+//   console.log(text);
+//   const textArray = text.split('\n');
+//   const outputArray = [];
+
+//   for (const item of textArray) {
+//     const [first, last] = item.trim().split('_');
+//     outputArray.push(
+//       first.toLowerCase() + last.replace(last[0],last[0].toUpperCase())
+//       //last[0].toUpperCase() + last.slice(1).toLowerCase()
+//     );
+//   }
+// let outputString=''
+//   for(let i=0; i<outputArray.length;i++){
+//     outputString += `${outputArray[i].padEnd(20)}${'✅'.repeat(i + 1)}\n`;
+//   }
+//   console.log(outputString);
+// });
