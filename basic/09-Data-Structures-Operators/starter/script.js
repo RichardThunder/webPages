@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-01-17 02:00:58
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-01-31 09:50:27
+ * @LastEditTime: 2024-02-01 00:18:51
  * @FilePath: /webPages/basic/09-Data-Structures-Operators/starter/script.js
  * @Description:
  *
