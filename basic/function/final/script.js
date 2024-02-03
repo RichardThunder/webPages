@@ -408,3 +408,85 @@ GOOD LUCK 😀
 })();
 */
 
+// const oneWord = function (str) {
+//   return str.replace(/ /g, '').toLowerCase();
+// };
+
+// const upperFirstWord = function (str) {
+//   const [first, ...others] = str.split(' ');
+//   return [first.toUpperCase(), ...others].join(' ');
+// };
+
+//high oder function
+// const transformer = function (str, fn) {
+//   console.log(`Original string: ${str}`);
+//   console.log(`Transformed string: ${fn(str)}`);
+//   console.log(`Transformed by: ${fn.name}`);
+// };
+
+// transformer('Javascript is the best!', upperFirstWord);
+// transformer('Javascript is the best!', oneWord);
+
+// const high5 = function () {
+//   console.log('👌');
+// };
+//点击页面空白区域调用high5
+// document.body.addEventListener('click', high5);
+// ['Jonas', 'Martha', 'Adam'].forEach(high5);
+
+// const greet = function (greeting) {
+//   return function (name) {
+//     console.log(`${greeting} ${name}`);
+//   };
+// };
+
+//改写成箭头函数
+// const greet = greeting => name => console.log(`${greeting} ${name}`);
+
+// const greeterHey = greet('Hey');
+// greeterHey('yue');
+// greet('hey')('ting');
+
+
+const lufthansa={
+    airline:'Lufthansa',
+    iataCode:'LH',
+    bookings:[], 
+    book(flightNum,name){
+        this.bookings.push({flight:`${this.iataCode}${flightNum}`,name});
+        console.log(this.bookings);
+        
+        console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
+    },
+};
+lufthansa.book(239,'yue tingpei')
+lufthansa.book(635,'qian wen')
+
+const eurowings={
+    name:'Eurowings',    
+    iataCode:'EW',  
+    bookings:[],
+};
+
+
+const book = lufthansa.book;
+
+//func.call(this,args)
+book.call(eurowings,23,'Sarah Williams');
+book.call(lufthansa,23,'Sarah Williams');
+console.log(eurowings);
+console.log(lufthansa);
+ 
+const swiss={
+    name:'swiss air lines',    
+    iataCode:'LX',  
+    bookings:[],
+}
+book.call(swiss,583,'Mary Cooper');
+
+const flightData=[583,'Mary Cooper'];
+book.apply(swiss,flightData)
+
+console.log(swiss);
+
+
