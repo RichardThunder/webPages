@@ -454,7 +454,6 @@ const lufthansa = {
   book(flightNum, name) {
     this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
     console.log(this.bookings);
-
     console.log(
       `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
     );
@@ -508,3 +507,18 @@ bookLH(50, 'qian');
 const bookSW30 = book.bind(swiss, 30);
 
 bookSW30('tingpei');
+
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+
+//在事件处理函数中，this永远指向元素，所以需要手动指定this
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+//partial application
+ 
