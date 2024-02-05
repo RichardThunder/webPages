@@ -447,46 +447,64 @@ GOOD LUCK 😀
 // greeterHey('yue');
 // greet('hey')('ting');
 
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNum, name) {
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+    console.log(this.bookings);
 
-const lufthansa={
-    airline:'Lufthansa',
-    iataCode:'LH',
-    bookings:[], 
-    book(flightNum,name){
-        this.bookings.push({flight:`${this.iataCode}${flightNum}`,name});
-        console.log(this.bookings);
-        
-        console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
-    },
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+  },
 };
-lufthansa.book(239,'yue tingpei')
-lufthansa.book(635,'qian wen')
+lufthansa.book(239, 'yue tingpei');
+lufthansa.book(635, 'qian wen');
 
-const eurowings={
-    name:'Eurowings',    
-    iataCode:'EW',  
-    bookings:[],
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
 };
-
 
 const book = lufthansa.book;
 
-//func.call(this,args)
-book.call(eurowings,23,'Sarah Williams');
-book.call(lufthansa,23,'Sarah Williams');
+//显示指定this关键字 call apply bind
+//func.call(this,args) 传入this和参数
+book.call(eurowings, 23, 'Sarah Williams');
+book.call(lufthansa, 23, 'Sarah Williams');
 console.log(eurowings);
 console.log(lufthansa);
- 
-const swiss={
-    name:'swiss air lines',    
-    iataCode:'LX',  
-    bookings:[],
-}
-book.call(swiss,583,'Mary Cooper');
 
-const flightData=[583,'Mary Cooper'];
-book.apply(swiss,flightData)
+const swiss = {
+  airline: 'swiss air lines',
+  iataCode: 'LX',
+  bookings: [],
+};
+book.call(swiss, 583, 'Mary Cooper');
 
-console.log(swiss);
+//apply method
+//apply(this,array of argument)
+//legacy method abandoned
+const flightData = [583, 'George Cooper'];
+book.apply(swiss, flightData);
+book.call(swiss, ...flightData);
 
+//bind method
+//返回一个新函数,永远绑定到指定的this, bind并不会调用执行函数
+const bookEW = book.bind(eurowings);
+const bookSW = book.bind(swiss);
+const bookLH = book.bind(lufthansa);
 
+bookEW(23, 'John Williams');
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('yue tingpei');
+
+bookSW(30, 'yueh');
+bookLH(50, 'qian');
+
+const bookSW30 = book.bind(swiss, 30);
+
+bookSW30('tingpei');
