@@ -447,86 +447,86 @@ GOOD LUCK 😀
 // greeterHey('yue');
 // greet('hey')('ting');
 
-const lufthansa = {
-  airline: 'Lufthansa',
-  iataCode: 'LH',
-  bookings: [],
-  book(flightNum, name) {
-    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
-    console.log(this.bookings);
-    console.log(
-      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
-    );
-  },
-};
-lufthansa.book(239, 'yue tingpei');
-lufthansa.book(635, 'qian wen');
+// const lufthansa = {
+//   airline: 'Lufthansa',
+//   iataCode: 'LH',
+//   bookings: [],
+//   book(flightNum, name) {
+//     this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+//     console.log(this.bookings);
+//     console.log(
+//       `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+//     );
+//   },
+// };
+// lufthansa.book(239, 'yue tingpei');
+// lufthansa.book(635, 'qian wen');
 
-const eurowings = {
-  airline: 'Eurowings',
-  iataCode: 'EW',
-  bookings: [],
-};
+// const eurowings = {
+//   airline: 'Eurowings',
+//   iataCode: 'EW',
+//   bookings: [],
+// };
 
-const book = lufthansa.book;
+// const book = lufthansa.book;
 
-//显示指定this关键字 call apply bind
-//func.call(this,args) 传入this和参数
-book.call(eurowings, 23, 'Sarah Williams');
-book.call(lufthansa, 23, 'Sarah Williams');
-console.log(eurowings);
-console.log(lufthansa);
+// //显示指定this关键字 call apply bind
+// //func.call(this,args) 传入this和参数
+// book.call(eurowings, 23, 'Sarah Williams');
+// book.call(lufthansa, 23, 'Sarah Williams');
+// console.log(eurowings);
+// console.log(lufthansa);
 
-const swiss = {
-  airline: 'swiss air lines',
-  iataCode: 'LX',
-  bookings: [],
-};
-book.call(swiss, 583, 'Mary Cooper');
+// const swiss = {
+//   airline: 'swiss air lines',
+//   iataCode: 'LX',
+//   bookings: [],
+// };
+// book.call(swiss, 583, 'Mary Cooper');
 
-//apply method
-//apply(this,array of argument)
-//legacy method abandoned
-const flightData = [583, 'George Cooper'];
-book.apply(swiss, flightData);
-book.call(swiss, ...flightData);
+// //apply method
+// //apply(this,array of argument)
+// //legacy method abandoned
+// const flightData = [583, 'George Cooper'];
+// book.apply(swiss, flightData);
+// book.call(swiss, ...flightData);
 
 //bind method
 //返回一个新函数,永远绑定到指定的this, bind并不会调用执行函数
-const bookEW = book.bind(eurowings);
-const bookSW = book.bind(swiss);
-const bookLH = book.bind(lufthansa);
+// const bookEW = book.bind(eurowings);
+// const bookSW = book.bind(swiss);
+// const bookLH = book.bind(lufthansa);
 
-bookEW(23, 'John Williams');
-const bookEW23 = book.bind(eurowings, 23);
-bookEW23('yue tingpei');
+// bookEW(23, 'John Williams');
+// const bookEW23 = book.bind(eurowings, 23);
+// bookEW23('yue tingpei');
 
-bookSW(30, 'yueh');
-bookLH(50, 'qian');
+// bookSW(30, 'yueh');
+// bookLH(50, 'qian');
 
-const bookSW30 = book.bind(swiss, 30);
+// const bookSW30 = book.bind(swiss, 30);
 
-bookSW30('tingpei');
+// bookSW30('tingpei');
 
-lufthansa.planes = 300;
-lufthansa.buyPlane = function () {
-  console.log(this);
-  this.planes++;
-  console.log(this.planes);
-};
+// lufthansa.planes = 300;
+// lufthansa.buyPlane = function () {
+//   console.log(this);
+//   this.planes++;
+//   console.log(this.planes);
+// };
 
-//在事件处理函数中，this永远指向元素，所以需要手动指定this
-document
-  .querySelector('.buy')
-  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+// //在事件处理函数中，this永远指向元素，所以需要手动指定this
+// document
+//   .querySelector('.buy')
+//   .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
 
-//partial application
-const addTax = (rate, value) => value + value * rate;
-console.log(addTax(0.1, 200));
+// //partial application
+// const addTax = (rate, value) => value + value * rate;
+// console.log(addTax(0.1, 200));
 
-const addTax030 = addTax.bind(null, 0.3);
-console.log(addTax030(1000));
-console.log(addTax030(5000));
+// const addTax030 = addTax.bind(null, 0.3);
+// console.log(addTax030(1000));
+// console.log(addTax030(5000));
 
 // const addTax = function (rate) {
 //   return value => value + value * rate;
@@ -575,41 +575,98 @@ BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 GOOD LUCK 😀
 */
 
-const poll = {
-  question: 'What is your favourite programming language?',
-  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
-  // This generates [0, 0, 0, 0]. More in the next section 😃
-  answers: new Array(4).fill(0),
-  registerNewAnswer() {
-    const option = +prompt(`${this.question}
-    ${this.options.join('\n')}\n(Write option number)`);
+// const poll = {
+//   question: 'What is your favourite programming language?',
+//   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+//   // This generates [0, 0, 0, 0]. More in the next section 😃
+//   answers: new Array(4).fill(0),
+//   registerNewAnswer() {
+//     const option = +prompt(`${this.question}
+//     ${this.options.join('\n')}\n(Write option number)`);
 
-    if (typeof option === 'number' && option >= 0 && option <= 3) {
-      this.answers[option]++;
-    } else console.log(`wrong input`);
-    this.displayResults();
-    this.displayResults('string');
-  },
-  displayResults(type = 'array') {
-    if (type === 'string') {
-      console.log(`Poll results are ${this.answers.join(', ')}`);
-    } else if (type === 'array') {
-      console.log(this.answers);
-    }
-  },
-};
+//     if (typeof option === 'number' && option >= 0 && option <= 3) {
+//       this.answers[option]++;
+//     } else console.log(`wrong input`);
+//     this.displayResults();
+//     this.displayResults('string');
+//   },
+//   displayResults(type = 'array') {
+//     if (type === 'string') {
+//       console.log(`Poll results are ${this.answers.join(', ')}`);
+//     } else if (type === 'array') {
+//       console.log(this.answers);
+//     }
+//   },
+// };
 
-document
-  .querySelector('.poll')
-  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+// document
+//   .querySelector('.poll')
+//   .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
-//1: [5, 2, 3]
-//2: [1, 5, 3, 9, 6, 1]
+// //1: [5, 2, 3]
+// //2: [1, 5, 3, 9, 6, 1]
 
-const newdisplay = poll.displayResults.bind({ answers: [5, 2, 3] });
-newdisplay('string'); //Poll results are 5, 2, 3
-newdisplay(); //[5, 2, 3]
+// const newdisplay = poll.displayResults.bind({ answers: [5, 2, 3] });
+// newdisplay('string'); //Poll results are 5, 2, 3
+// newdisplay(); //[5, 2, 3]
 
-const newdisplay2 = poll.displayResults.bind({ answers: [1, 5, 3, 9, 6, 1] });
-newdisplay2('string'); //Poll results are 5, 2, 3
-newdisplay2(); //[5, 2, 3]
+// const newdisplay2 = poll.displayResults.bind({ answers: [1, 5, 3, 9, 6, 1] });
+// newdisplay2('string'); //Poll results are 5, 2, 3
+// newdisplay2(); //[5, 2, 3]
+
+//只执行一次 立即调用函数 IIFE
+// (function(){
+//     console.log('This will never run again');
+//     const isPrivate=23;
+// })();
+
+// //或者
+// (()=>console.log('This will Also never run again!'
+// ))();
+
+// let f;
+
+// const g=function(){
+//     const a=23;
+//     f=function(){
+//         console.log(a*2);  
+//     };
+// };
+
+// const h=function(){
+//     const b=777;
+//     f=function(){
+//         console.log(b*2);  
+//     };
+// };
+// g();
+// f();
+// console.dir(f);
+
+// h();
+// f();
+// console.dir(f)
+
+// //example 2  timer
+// // perGroup 就是闭包
+// const boardPassengers = function (n, wait) {
+//   const perGroup = n / 3;
+//   setTimeout(function () {
+//     console.log(`We are now boarding all ${n} passengers.`);
+//     console.log(`There are 3 groups, each with ${perGroup} passengers.`);
+//   }, wait * 1000);
+//   console.log(`Will start boarding in ${wait} seconds`);
+// };
+
+// boardPassengers(180, 3);
+
+
+//code challenge
+(function(){
+    const header=document.querySelector('h1')
+    header.style.color='red'
+    document.querySelector('body').addEventListener('click',function(){
+        header.style.color='blue'
+        
+    })
+})();
