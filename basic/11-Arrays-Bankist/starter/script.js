@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-02-10 13:16:22
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-02-11 16:39:52
+ * @LastEditTime: 2024-02-12 23:58:41
  * @FilePath: \webPages\basic\11-Arrays-Bankist\starter\script.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -125,9 +125,72 @@
 // console.log('yue ting'.at(0)); //y
 // console.log('yue ting'.at(-1));  //g
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-for(const movment of movements){
-    if(movment>0){
-        console.log(`you deposited ${movement}`);
-    }
-}
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// for(const movement of movements){
+//     if(movement>0){
+//         console.log(`you deposited ${movement}`);
+//     }else {
+//         console.log(`you withdrew ${Math.abs(movement)}`);
+//     }
+// }
+
+// console.log(`-----FROEACH-------`);
+// movements.forEach(
+//     function(movement){if (movement > 0) {
+//       console.log(`you deposited ${movement}`);
+//     } else {
+//       console.log(`you withdrew ${Math.abs(movement)}`);
+//     }}
+// );
+
+// //map和set的forEach
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
+
+// //map forEach(function(value,key,map))
+// currencies.forEach(function(value,key,map){
+//     console.log(`${key}: ${value}, ${map}`);
+// })
+// //set forEach(function(value,key,map))
+// const currenciesUnique=new Set(['USD','GBP','USD','EUR','EUR']);
+// console.log(currenciesUnique);
+// currenciesUnique.forEach(function(value,key,map){
+//     console.log(`${key}: ${value}, ${map}`);
+// });
+
+// Data
+const account1 = {
+  owner: 'Jonas Schmedtmann',
+  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  interestRate: 1.2, // %
+  pin: 1111,
+};
+
+const account2 = {
+  owner: 'Jessica Davis',
+  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  interestRate: 1.5,
+  pin: 2222,
+};
+
+const account3 = {
+  owner: 'Steven Thomas Williams',
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  interestRate: 0.7,
+  pin: 3333,
+};
+
+const account4 = {
+  owner: 'Sarah Smith',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 4444,
+};
+
+const accounts = [account1, account2, account3, account4];
+
+//elements
+const labelWelcome=
