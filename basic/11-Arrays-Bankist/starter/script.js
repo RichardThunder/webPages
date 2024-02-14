@@ -2,8 +2,8 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-02-10 13:16:22
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-02-12 23:58:41
- * @FilePath: \webPages\basic\11-Arrays-Bankist\starter\script.js
+ * @LastEditTime: 2024-02-13 22:26:59
+ * @FilePath: /webPages/basic/11-Arrays-Bankist/starter/script.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 'use strict';
@@ -193,4 +193,96 @@ const account4 = {
 const accounts = [account1, account2, account3, account4];
 
 //elements
-const labelWelcome=
+// Elements
+const labelWelcome = document.querySelector('.welcome');
+const labelDate = document.querySelector('.date');
+const labelBalance = document.querySelector('.balance__value');
+const labelSumIn = document.querySelector('.summary__value--in');
+const labelSumOut = document.querySelector('.summary__value--out');
+const labelSumInterest = document.querySelector('.summary__value--interest');
+const labelTimer = document.querySelector('.timer');
+
+const containerApp = document.querySelector('.app');
+const containerMovements = document.querySelector('.movements');
+
+const btnLogin = document.querySelector('.login__btn');
+const btnTransfer = document.querySelector('.form__btn--transfer');
+const btnLoan = document.querySelector('.form__btn--loan');
+const btnClose = document.querySelector('.form__btn--close');
+const btnSort = document.querySelector('.btn--sort');
+
+const inputLoginUsername = document.querySelector('.login__input--user');
+const inputLoginPin = document.querySelector('.login__input--pin');
+const inputTransferTo = document.querySelector('.form__input--to');
+const inputTransferAmount = document.querySelector('.form__input--amount');
+const inputLoanAmount = document.querySelector('.form__input--loan-amount');
+const inputCloseUsername = document.querySelector('.form__input--user');
+const inputClosePin = document.querySelector('.form__input--pin');
+
+const displayMovements = function (movement) {
+    containerMovements.innerHTML = '';
+
+    movement.movements.forEach(function (value,i) {
+        const type =
+          value > 0
+            ? 'deposit'
+            : 'withdrawal';
+        if (value < 0) {
+            value = Math.abs(value);
+        }
+        let nl=new Intl.NumberFormat('en-US')
+        value = nl.format(value)
+
+       const html = `<div class="movements__row">
+          <div class="movements__type movements__type--${type}">${i+1} ${type}</div>
+          <div class="movements__value">${value}€</div>
+        </div>`;
+        containerMovements.insertAdjacentHTML('afterbegin', html);
+    })
+}
+displayMovements(account1);
+
+///////////////////////////////////////
+// Coding Challenge #1
+
+/* 
+Julia and Kate are doing a study on dogs. So each of them asked 5 dog owners about their dog's age, and stored the data into an array (one array for each). For now, they are just interested in knowing whether a dog is an adult or a puppy. A dog is an adult if it is at least 3 years old, and it's a puppy if it's less than 3 years old.
+
+Create a function 'checkDogs', which accepts 2 arrays of dog's ages ('dogsJulia' and 'dogsKate'), and does the following things:
+
+1. Julia found out that the owners of the FIRST and the LAST TWO dogs actually have cats, not dogs! So create a shallow copy of Julia's array, and remove the cat ages from that copied array (because it's a bad practice to mutate function parameters)
+2. Create an array with both Julia's (corrected) and Kate's data
+3. For each remaining dog, log to the console whether it's an adult ("Dog number 1 is an adult, and is 5 years old") or a puppy ("Dog number 2 is still a puppy 🐶")
+4. Run the function for both test datasets
+
+HINT: Use tools from all lectures in this section so far 😉
+
+TEST DATA 1: Julia's data [3, 5, 2, 12, 7], Kate's data [4, 1, 15, 8, 3]
+TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
+
+GOOD LUCK 😀
+*/
+// const checkDogs = function (dogsJulia, dogsKate) {
+//     const dogsJuliaCorrected = dogsJulia.slice(1, -2);
+//     console.log(dogsJulia);
+//     console.log(dogsJuliaCorrected);
+//     const botharr = [...dogsJuliaCorrected, ...dogsKate];
+//     botharr.forEach(function (value, i) {
+//         value < 3
+//           ? console.log(`Dog number ${i + 1} is still a puppy 🐶`)
+//           : console.log(`Dog number ${i+1} is an adult, and is ${value} years old`);
+        
+//     })
+// }
+// const Julia=[3, 5, 2, 12, 7];
+// const Kate = [4, 1, 15, 8, 3];
+// checkDogs(Julia, Kate);
+
+const eurToUsd = 1.1;
+const movementsUSD = account1.movements.map(mov => mov * eurToUsd)
+console.log(account1.movements);
+console.log(movementsUSD);
+
+const movementsUSDfor = [];
+for (const mov of account1.movements) movementsUSDfor.push(mov * eurToUsd)
+console.log(movementsUSDfor);
