@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-02-10 13:16:22
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-02-15 23:25:46
+ * @LastEditTime: 2024-02-16 00:59:54
  * @FilePath: /webPages/basic/11-Arrays-Bankist/starter/script.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -245,52 +245,53 @@ const displayMovements = function (movement) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
+
 
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, move) => acc + move, 0);
   labelBalance.textContent = balance + '€';
 };
-calcDisplayBalance(account1.movements);
 
-const calcDisplaySummary = function (movements) {
-  const deposits = movements
+const calcDisplaySummary = function (account) {
+  const deposits = account.movements
     .filter(value => value > 0)
     .reduce((acc, curr) => acc + curr, 0);
-  const withdrawals = movements
+  const withdrawals = account.movements
     .filter(value => value < 0)
     .reduce((acc, curr) => acc + Math.abs(curr), 0);
-  const interest = movements
+  const interest = account.movements
     .filter(value => value > 0)
-    .map((value,index,arr)=>(value*1.2)/100)
-    .filter((value)=>value>=1)
-    .reduce((acc,curr)=>acc+curr,0);
+    .map((value, index, arr) => (value * account.interestRate) / 100)
+    .filter(value => value >= 1)
+    .reduce((acc, curr) => acc + curr, 0);
   labelSumIn.textContent = `${deposits}€`;
   labelSumOut.textContent = `${withdrawals}€`;
   labelSumInterest.textContent = `${interest}€`;
 };
-calcDisplaySummary(account1.movements);
 
 //find 方法
-btnLogin.addEventListener('click',function(e){
-    //Prevent form from submitting
-    e.preventDefault();
-    console.log('LOGIN');
-    const currentAccount=accounts.find(value=>value.owner === inputLoginUsername.value);
-    console.log(currentAccount);
-    if(currentAccount?.pin===Number(inputLoginPin.value)){
-        //Display ui and message
-        labelWelcome.textContent=`Welcome back, ${currentAccount.owner.split(' ')[0]}`;
-        containerApp.style.opacity=100;
-    }
-
-
+btnLogin.addEventListener('click', function (e) {
+  //Prevent form from submitting
+  e.preventDefault();
+  console.log('LOGIN');
+  const currentAccount = accounts.find(
+    value => value.owner === inputLoginUsername.value
+  );
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    //Display ui and message
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur(); //隐藏闪烁的光标
+    //displayBalance
+    calcDisplayBalance(currentAccount.movements);
+    //displaySummary
+    calcDisplaySummary(currentAccount);
+    displayMovements(currentAccount.movements);
+  }
 });
-
-
-
-
-
 
 //使用map过滤元素
 const user = 'Steven Thomas Williams';
