@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-02-10 13:16:22
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-02-13 22:26:59
+ * @LastEditTime: 2024-02-15 23:25:46
  * @FilePath: /webPages/basic/11-Arrays-Bankist/starter/script.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -105,7 +105,7 @@
 
 // //concat 拼接数组
 // const letters=arr.concat(arr2)
-// console.log(letters); // ['a', 'b', 'c', 'd', 'e', 'f', 'f', 'g', 'h', 'i', 'j'] 
+// console.log(letters); // ['a', 'b', 'c', 'd', 'e', 'f', 'f', 'g', 'h', 'i', 'j']
 // console.log([...arr,...arr2]); //['a', 'b', 'c', 'd', 'e', 'f', 'f', 'g', 'h', 'i', 'j']
 
 // //join
@@ -120,7 +120,7 @@
 // console.log(arr[arr.length-1]); //64
 // console.log(arr.slice(-1)[0]);  //64
 // console.log(arr.at(-1));  //64
-// console.log(arr.at(-2));  //11 
+// console.log(arr.at(-2));  //11
 // //at 可以在string 中使用
 // console.log('yue ting'.at(0)); //y
 // console.log('yue ting'.at(-1));  //g
@@ -189,6 +189,12 @@ const account4 = {
   interestRate: 1,
   pin: 4444,
 };
+const account5 = {
+  owner: 'Sarah Smith',
+  movements: [-430, -1000, -700, -50, -90],
+  interestRate: 1,
+  pin: 4444,
+};
 
 const accounts = [account1, account2, account3, account4];
 
@@ -220,32 +226,110 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 const displayMovements = function (movement) {
-    containerMovements.innerHTML = '';
+  containerMovements.innerHTML = '';
 
-    movement.movements.forEach(function (value,i) {
-        const type =
-          value > 0
-            ? 'deposit'
-            : 'withdrawal';
-        if (value < 0) {
-            value = Math.abs(value);
-        }
-        let nl=new Intl.NumberFormat('en-US')
-        value = nl.format(value)
+  movement.forEach(function (value, i) {
+    const type = value > 0 ? 'deposit' : 'withdrawal';
+    if (value < 0) {
+      value = Math.abs(value);
+    }
+    let nl = new Intl.NumberFormat('en-US');
+    value = nl.format(value);
 
-       const html = `<div class="movements__row">
-          <div class="movements__type movements__type--${type}">${i+1} ${type}</div>
+    const html = `<div class="movements__row">
+          <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
           <div class="movements__value">${value}€</div>
         </div>`;
-        containerMovements.insertAdjacentHTML('afterbegin', html);
-    })
-}
-displayMovements(account1);
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+displayMovements(account1.movements);
+
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, move) => acc + move, 0);
+  labelBalance.textContent = balance + '€';
+};
+calcDisplayBalance(account1.movements);
+
+const calcDisplaySummary = function (movements) {
+  const deposits = movements
+    .filter(value => value > 0)
+    .reduce((acc, curr) => acc + curr, 0);
+  const withdrawals = movements
+    .filter(value => value < 0)
+    .reduce((acc, curr) => acc + Math.abs(curr), 0);
+  const interest = movements
+    .filter(value => value > 0)
+    .map((value,index,arr)=>(value*1.2)/100)
+    .filter((value)=>value>=1)
+    .reduce((acc,curr)=>acc+curr,0);
+  labelSumIn.textContent = `${deposits}€`;
+  labelSumOut.textContent = `${withdrawals}€`;
+  labelSumInterest.textContent = `${interest}€`;
+};
+calcDisplaySummary(account1.movements);
+
+//find 方法
+btnLogin.addEventListener('click',function(e){
+    //Prevent form from submitting
+    e.preventDefault();
+    console.log('LOGIN');
+    const currentAccount=accounts.find(value=>value.owner === inputLoginUsername.value);
+    console.log(currentAccount);
+    if(currentAccount?.pin===Number(inputLoginPin.value)){
+        //Display ui and message
+        labelWelcome.textContent=`Welcome back, ${currentAccount.owner.split(' ')[0]}`;
+        containerApp.style.opacity=100;
+    }
+
+
+});
+
+
+
+
+
+
+//使用map过滤元素
+const user = 'Steven Thomas Williams';
+const createUsernames = function (accs) {
+  accs.forEach(acc => {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+
+// //使用filter
+// const deposits = account1.movements.filter(function (mov) {
+//   return mov > 0;
+// });
+// const withdrawals = account1.movements.filter(mov => mov < 0);
+
+// //reduce(callbackfn(acc,curr,index,array),initalValue)
+// const balance = account1.movements.reduce((acc, curr, index, arr) => {
+//   console.log(`Iteration ${index}: ${acc},${curr}`);
+//   return acc + curr;
+// }, 100);
+
+// //reduce maximum value
+// const getMaxValue = function (movements) {
+//   return movements.reduce(
+//     (acc, curr) => (acc > curr ? acc : curr)
+//     // ,movements[0]
+//   );
+// };
+// console.log(getMaxValue(account5.movements));
 
 ///////////////////////////////////////
 // Coding Challenge #1
 
-/* 
+/*
 Julia and Kate are doing a study on dogs. So each of them asked 5 dog owners about their dog's age, and stored the data into an array (one array for each). For now, they are just interested in knowing whether a dog is an adult or a puppy. A dog is an adult if it is at least 3 years old, and it's a puppy if it's less than 3 years old.
 
 Create a function 'checkDogs', which accepts 2 arrays of dog's ages ('dogsJulia' and 'dogsKate'), and does the following things:
@@ -271,18 +355,62 @@ GOOD LUCK 😀
 //         value < 3
 //           ? console.log(`Dog number ${i + 1} is still a puppy 🐶`)
 //           : console.log(`Dog number ${i+1} is an adult, and is ${value} years old`);
-        
+
 //     })
 // }
 // const Julia=[3, 5, 2, 12, 7];
 // const Kate = [4, 1, 15, 8, 3];
 // checkDogs(Julia, Kate);
 
-const eurToUsd = 1.1;
-const movementsUSD = account1.movements.map(mov => mov * eurToUsd)
-console.log(account1.movements);
-console.log(movementsUSD);
+// const eurToUsd = 1.1;
+// const movementsUSD = account1.movements.map(mov => mov * eurToUsd)
+// console.log(account1.movements);
+// console.log(movementsUSD);
 
-const movementsUSDfor = [];
-for (const mov of account1.movements) movementsUSDfor.push(mov * eurToUsd)
-console.log(movementsUSDfor);
+// const movementsUSDfor = [];
+// for (const mov of account1.movements) movementsUSDfor.push(mov * eurToUsd)
+// console.log(movementsUSDfor);
+
+///////////////////////////////////////
+// Coding Challenge #2
+
+/* 
+Let's go back to Julia and Kate's study about dogs. This time, they want to convert 
+dog ages to human ages and calculate the average age of the dogs in their study.
+
+Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages ('ages'), 
+and does the following things in order:
+
+1. Calculate the dog age in human years using the following formula: if the dog is <= 2 years old,
+ humanAge = 2 * dogAge. If the dog is > 2 years old, humanAge = 16 + dogAge * 4.
+2. Exclude all dogs that are less than 18 human years old (which is the same as keeping dogs 
+    that are at least 18 years old)
+3. Calculate the average human age of all adult dogs (you should already know from other challenges 
+    how we calculate averages 😉)
+4. Run the function for both test datasets
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+GOOD LUCK 😀
+*/
+
+//调试技巧， 通过使用arr参数打印链式调用每一步产生的数组
+// const calcAverageHumanAge = function(ages){
+//     return ages
+//       .map((value, i,arr) => {
+//         console.log(arr);
+//         return value <= 2 ? value * 2 : 16 + value * 4;
+
+//     })
+//       .filter((value,index,arr) => {
+//         console.log(arr);
+//         return value>=18;
+//       })
+//       .reduce((acc, curr, i, arr) => {
+//         console.log(arr);
+//         return acc + curr / arr.length;
+//       }, 0);
+// }
+// console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
+// console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
