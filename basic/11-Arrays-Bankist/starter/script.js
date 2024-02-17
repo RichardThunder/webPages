@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-02-10 13:16:22
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-02-16 22:27:42
+ * @LastEditTime: 2024-02-17 21:21:04
  * @FilePath: /webPages/basic/11-Arrays-Bankist/starter/script.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -225,9 +225,12 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (acc) {
+const displayMovements = function (acc, seq) {
   containerMovements.innerHTML = '';
-
+  if (sort) {
+    acc.movements.sort((a, b) => (seq ? a - b : b - a));
+  }
+  console.log(acc.movements);
   acc.movements.forEach(function (value, i) {
     const type = value > 0 ? 'deposit' : 'withdrawal';
     if (value < 0) {
@@ -270,7 +273,7 @@ const calcDisplaySummary = function (account) {
   labelSumInterest.textContent = `${account.interest}€`;
 };
 let currentAccount;
-const updateUI=function(acc){
+const updateUI = function (acc) {
   //displayBalance
   calcDisplayBalance(acc);
   //displaySummary
@@ -309,7 +312,7 @@ btnTransfer.addEventListener('click', function (e) {
   const recvAmount = Number(inputTransferAmount.value);
   if (
     recvAmount > 0 &&
-    recvAccount&&
+    recvAccount &&
     recvAmount <= currentAccount.balance &&
     recvAccount?.username !== currentAccount.username
   ) {
@@ -325,47 +328,48 @@ btnTransfer.addEventListener('click', function (e) {
 });
 
 //关闭账户
-btnClose.addEventListener('click',function(e){
-    e.preventDefault();
-    console.log(`Delete`);
-    //验证
-    const closeAccountIndex=accounts.findIndex(acc=>(acc.username===inputCloseUsername.value 
-        && acc.pin===Number(inputClosePin.value)));
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  console.log(`Delete`);
+  //验证
+  const closeAccountIndex = accounts.findIndex(
+    acc =>
+      acc.username === inputCloseUsername.value &&
+      acc.pin === Number(inputClosePin.value)
+  );
 
-    if(closeAccountIndex!=-1){
-        accounts.splice(closeAccountIndex,1);
-        console.log(`account deleted`);
-        currentAccount='';
-        containerApp.style.opacity=0;
-    }else{
-        console.log(`account not deleted`);
-    }
-    //清空输入框
-    inputCloseUsername.value = inputClosePin.value='';
+  if (closeAccountIndex != -1) {
+    accounts.splice(closeAccountIndex, 1);
+    console.log(`account deleted`);
+    currentAccount = '';
+    containerApp.style.opacity = 0;
+  } else {
+    console.log(`account not deleted`);
+  }
+  //清空输入框
+  inputCloseUsername.value = inputClosePin.value = '';
 });
 
 //loan
-btnLoan.addEventListener('click',function(e){
-    e.preventDefault();
-    const amount=Number(inputLoanAmount.value);
-    if(amount>0&& currentAccount.movements.some(mov=>mov>=amount*0.1)){
-        //add movement
-        currentAccount.movements.push(amount);
-        //update UI
-        updateUI(currentAccount);
-    }
-    inputLoanAmount='';
-})
-
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    //add movement
+    currentAccount.movements.push(amount);
+    //update UI
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
 
 console.log(account1.movements);
 //include
 console.log(account1.movements.includes(-130));
 //some
-console.log(account1.movements.some(mov=>mov>0));
+console.log(account1.movements.some(mov => mov > 0));
 //every
-console.log(account1.movements.every(mov=>mov>10000));
-
+console.log(account1.movements.every(mov => mov > 10000));
 
 //使用map过滤元素
 const createUsernames = function (accs) {
@@ -488,3 +492,42 @@ GOOD LUCK 😀
 // }
 // console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
 // console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// movements.sort();
+// console.log(movements);
+// movements.sort((a, b) => a - b);
+// console.log(movements);
+
+let sort = false;
+let sequence = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  sort = true;
+  displayMovements(currentAccount, sequence);
+  if (sequence) {
+    sequence = false;
+    btnSort.textContent = '\u2191 SORT';
+  } else {
+    sequence = true;
+    btnSort.textContent = '\u2193 SORT';
+  }
+  console.log(sequence);
+});
+
+// console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+// const x = new Array(7);
+// console.log(x);
+// x.fill(2);
+// console.log(x);
+
+// const y = Array.from({ length: 7 }, () => 1);
+// const z = Array.from({ length: 7 }, (_, i) => i + 1);
+// console.log(y);
+// console.log(z);
+
+const movArray = Array.from(
+  document.querySelectorAll('.movements__value'),
+  el => el.textContent.replace('€', '')
+);
+     
