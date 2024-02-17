@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-02-10 13:16:22
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-02-16 22:27:42
+ * @LastEditTime: 2024-02-17 13:06:40
  * @FilePath: /webPages/basic/11-Arrays-Bankist/starter/script.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -378,6 +378,25 @@ const createUsernames = function (accs) {
   });
 };
 createUsernames(accounts);
+
+console.log(typeof undefined);
+console.log([ 1,2, 3].map(parseInt));
+
+
+////在稀疏数组上使用 flatMap()
+// console.log([1, 2, , 4, 5].flatMap((x) => [x, x * 2])); // [1, 2, 2, 4, 4, 8, 5, 10]
+// console.log([1, 2, 3, 4].flatMap((x) => [x * 2])); // [2, 4, 6, 8]
+
+
+//// 假设我们想要删除所有负数，并将奇数拆分成偶数和 1
+// const a=[200, 450, -400, 3000, -650, -130, 70, 1300];
+// const result=a.flatMap(
+//     n=>{
+//         if(n<0) {return [];}
+//         return n%2?[n]:[n-1,1];
+//     }
+// );
+// console.log(result);
 
 // //使用filter
 // const deposits = account1.movements.filter(function (mov) {
