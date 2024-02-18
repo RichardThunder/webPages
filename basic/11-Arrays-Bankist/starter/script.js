@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-02-10 13:16:22
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-02-17 21:25:14
+ * @LastEditTime: 2024-02-18 11:28:23
  * @FilePath: /webPages/basic/11-Arrays-Bankist/starter/script.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -236,8 +236,8 @@ const displayMovements = function (acc, seq) {
     if (value < 0) {
       value = Math.abs(value);
     }
-    let nl = new Intl.NumberFormat('en-US');
-    value = nl.format(value);
+    // let nl = new Intl.NumberFormat('en-US');
+    // value = nl.format(value);
 
     const html = `<div class="movements__row">
           <div class="movements__type movements__type--${type}">${
@@ -545,8 +545,11 @@ btnSort.addEventListener('click', function (e) {
 // console.log(y);
 // console.log(z);
 
-const movArray = Array.from(
-  document.querySelectorAll('.movements__value'),
-  el => el.textContent.replace('€', '')
-);
-     
+labelBalance.addEventListener('click', function () {
+  const movArray = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(movArray);
+});
+
