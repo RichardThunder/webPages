@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-02-10 13:16:22
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-02-18 11:28:23
+ * @LastEditTime: 2024-02-18 22:16:54
  * @FilePath: /webPages/basic/11-Arrays-Bankist/starter/script.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -384,13 +384,11 @@ const createUsernames = function (accs) {
 createUsernames(accounts);
 
 console.log(typeof undefined);
-console.log([ 1,2, 3].map(parseInt));
-
+console.log([1, 2, 3].map(parseInt));
 
 ////在稀疏数组上使用 flatMap()
 // console.log([1, 2, , 4, 5].flatMap((x) => [x, x * 2])); // [1, 2, 2, 4, 4, 8, 5, 10]
 // console.log([1, 2, 3, 4].flatMap((x) => [x * 2])); // [2, 4, 6, 8]
-
 
 //// 假设我们想要删除所有负数，并将奇数拆分成偶数和 1
 // const a=[200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -533,6 +531,13 @@ btnSort.addEventListener('click', function (e) {
   }
   console.log(sequence);
 });
+labelBalance.addEventListener('click', function () {
+  const movArray = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(movArray);
+});
 
 // console.log(new Array(1, 2, 3, 4, 5, 6, 7));
 // const x = new Array(7);
@@ -545,11 +550,105 @@ btnSort.addEventListener('click', function (e) {
 // console.log(y);
 // console.log(z);
 
-labelBalance.addEventListener('click', function () {
-  const movArray = Array.from(
-    document.querySelectorAll('.movements__value'),
-    el => Number(el.textContent.replace('€', ''))
-  );
-  console.log(movArray);
-});
+// // 4.
+// // this is a nice title -> This Is a Nice Title
+// const convertTitleCase = function (title) {
+//   const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+//   return title.toLowerCase().split(' ').map((value)=>{
+//     if(exceptions.includes(value)){
+//         return value;
+//     }
+//     else{
+//         return value[0].toUpperCase()+value.slice(1);
+//     }
+//   }).join(' ');
 
+// };
+
+// console.log(convertTitleCase('this is a nice title'));
+// console.log(convertTitleCase('this is a LONG title but not too long'));
+// console.log(convertTitleCase('and here is another title with an EXAMPLE'));
+
+// // const bankDeposit=accounts.flatMap(acc=>acc.movements).filter(val=>val>0);
+// const bankDeposit = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, curr) => {
+//     return curr > 0 ? acc + curr : acc;
+//   }, 0);
+// console.log(bankDeposit);
+
+// // const numdeposits1000=accounts.flatMap((acc)=>acc.movements).filter((value)=>value>=1000).length;
+// // console.log(numdeposits1000);
+// const numdeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce(
+//     (count, val) =>
+//       val >= 1000
+//         ? ++count //count+1 不能使用count++ 因为累加之后的值会被丢弃
+//         : count,
+//     0
+//   );
+// console.log(numdeposits1000);
+
+// const {deposit,withDrawal} = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce(
+//     // (sum, val) => {
+//     //   val < 0 ? (sum.withDrawal += val) : (sum.deposit += val);
+//     //   return sum;
+//     (sum,val)=>
+// {
+//     sum[val<0?'withDrawal':'deposit'] +=val; //另一种使用对象下标访问属性
+//     return sum;
+//     },
+//     { withDrawal: 0, deposit: 0 }
+//   );
+// console.log(deposit,withDrawal);
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+
+/* 
+Julia and Kate are still studying dogs, and this time they are studying if dogs are eating 
+too much or too little.
+Eating too much means the dog's current food portion is larger than the recommended portion, 
+and eating too little is the opposite.
+Eating an okay amount means the dog's current food portion is within a range 10% above and 
+10% below the recommended portion (see hint).
+
+1. Loop over the array containing dog objects, and for each dog, calculate the recommended 
+food portion and add it to the object as a new property. Do NOT create a new array, simply 
+loop over the array. Forumla: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, 
+    and the weight needs to be in kg)
+2. Find Sarah's dog and log to the console whether it's eating too much or too little.
+ HINT: Some dogs have multiple owners, so you first need to find Sarah in the owners array, 
+ and so this one is a bit tricky (on purpose) 🤓
+3. Create an array containing all owners of dogs who eat too much ('ownersEatTooMuch') and 
+an array with all owners of dogs who eat too little ('ownersEatTooLittle').
+4. Log a string to the console for each array created in 3., like this: "Matilda and Alice 
+and Bob's dogs eat too much!" and "Sarah and John and Michael's dogs eat too little!"
+5. Log to the console whether there is any dog eating EXACTLY the amount of food that is
+ recommended (just true or false)
+6. Log to the console whether there is any dog eating an OKAY amount of food (just true or false)
+7. Create an array containing the dogs that are eating an OKAY amount of food (try to reuse 
+    the condition used in 6.)
+8. Create a shallow copy of the dogs array and sort it by recommended food portion in an
+ ascending order (keep in mind that the portions are inside the array's objects)
+
+HINT 1: Use many different tools to solve these challenges, you can use the summary lecture
+ to choose between them 😉
+HINT 2: Being within a range 10% above and below the recommended portion means: 
+current > (recommended * 0.90) && current < (recommended * 1.10). Basically, the current 
+portion should be between 90% and 110% of the recommended portion.
+
+TEST DATA:
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] }
+];
+
+GOOD LUCK 😀
+ */
