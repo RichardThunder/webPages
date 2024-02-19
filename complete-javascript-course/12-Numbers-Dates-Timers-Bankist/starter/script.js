@@ -216,7 +216,7 @@ btnLoan.addEventListener('click', function (e) {
     updateUI(currentAccount);
   }
   inputLoanAmount.value = '';
-});
+}); 
 
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();

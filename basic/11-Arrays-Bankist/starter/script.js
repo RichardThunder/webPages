@@ -2,7 +2,7 @@
  * @Author: Richard yuetingpei888@gmail.com
  * @Date: 2024-02-10 13:16:22
  * @LastEditors: Richard yuetingpei888@gmail.com
- * @LastEditTime: 2024-02-18 22:16:54
+ * @LastEditTime: 2024-02-19 13:27:58
  * @FilePath: /webPages/basic/11-Arrays-Bankist/starter/script.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -383,8 +383,8 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
-console.log(typeof undefined);
-console.log([1, 2, 3].map(parseInt));
+// console.log(typeof undefined);
+// console.log([1, 2, 3].map(parseInt));
 
 ////在稀疏数组上使用 flatMap()
 // console.log([1, 2, , 4, 5].flatMap((x) => [x, x * 2])); // [1, 2, 2, 4, 4, 8, 5, 10]
@@ -608,7 +608,6 @@ labelBalance.addEventListener('click', function () {
 ///////////////////////////////////////
 // Coding Challenge #4
 
-
 /* 
 Julia and Kate are still studying dogs, and this time they are studying if dogs are eating 
 too much or too little.
@@ -652,3 +651,75 @@ const dogs = [
 
 GOOD LUCK 😀
  */
+
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+//1.
+dogs.forEach(
+  dog => (dog.recommendedFood = Math.trunc(dog.weight ** 0.75 * 28))
+);
+console.log(dogs);
+//2.
+dogs
+  .filter(dog => dog.owners.includes('Sarah'))
+  .forEach(dog => {
+    if (dog.curFood < dog.recommendedFood * 0.9) {
+      console.log('eating too little');
+    } else if (dog.curFood > dog.recommendedFood * 1.1) {
+      console.log('eating too much');
+    } else {
+      console.log('eating okay amount');
+    }
+  });
+//3.
+const ownersEatTooMuch = dogs.filter(
+  dog => dog.curFood > 1.1 * dog.recommendedFood
+);
+const ownersEatTooLittle = dogs.filter(
+  dog => dog.curFood < 0.9 * dog.recommendedFood
+);
+console.log(ownersEatTooMuch, ownersEatTooLittle);
+
+//4.
+const ownersMuch = ownersEatTooMuch.flatMap(dog => dog.owners);
+const ownersLittle = ownersEatTooLittle.flatMap(dog => dog.owners);
+console.log(`${ownersMuch.join(' and ')}'s dogs eat too much!`);
+console.log(`${ownersLittle.join(' and ')}'s dogs eat too little!`);
+
+//5.
+// const exactlyFood = dogs.filter(dog => dog.curFood === dog.recommendedFood);
+// console.log(exactlyFood.length ? true : false);
+const exactlyFood = dogs.some(dog => dog.curFood === dog.recommendedFood);
+console.log(exactlyFood);
+
+//6.
+// const okFood = dogs.filter(
+//   dog =>
+//     dog.curFood >= dog.recommendedFood * 0.9 &&
+//     dog.curFood <= dog.recommendedFood * 1.1
+// );
+// console.log(okFood.length ? true : false);
+const okFood = dogs.some(
+  dog =>
+    dog.curFood >= dog.recommendedFood * 0.9 &&
+    dog.curFood <= dog.recommendedFood * 1.1
+);
+console.log(okFood);
+
+//7.
+// console.log(okFood);
+const okFood7 = dogs.filter(
+  dog =>
+    dog.curFood >= dog.recommendedFood * 0.9 &&
+    dog.curFood <= dog.recommendedFood * 1.1
+);
+console.log(okFood7);
+//8.
+// const newArray = [...dogs];
+const newArray=dogs.slice();
+newArray.sort((a, b) => a.recommendedFood - b.recommendedFood);
+console.log(newArray);
